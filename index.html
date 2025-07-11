@@ -13,7 +13,7 @@
       --text-color-dark: #f5f5f5;
       --box-bg-light: rgba(255, 255, 255, 0.9);
       --box-bg-dark: rgba(0, 0, 0, 0.7);
-      --accent-color: #ff4444;
+      --accent-color: #ff4444; /* Kırmızı ama artık sadece arka plan, yazılarda kullanılmıyor */
     }
     body {
       margin: 0;
@@ -28,6 +28,7 @@
       background: var(--bg-color-light);
       color: var(--text-color-light);
     }
+
     .loader-container {
       position: absolute;
       top: 50%;
@@ -141,6 +142,8 @@
       width: 300px;
       box-shadow: 0 0 15px var(--accent-color);
       transition: background 0.3s, color 0.3s;
+      /* Kırmızı yazı yerine beyaz yapıldı: */
+      color: white;
     }
     body.light-theme .info-box {
       background: rgba(0, 0, 0, 0.05);
@@ -153,8 +156,9 @@
     .info-box h2 {
       margin-top: 0;
       margin-bottom: 12px;
-      color: var(--accent-color);
-      text-shadow: 1px 1px 3px #000000aa;
+      /* Kırmızı yerine beyaz: */
+      color: white;
+      text-shadow: none;
     }
     body.light-theme .info-box h2 {
       text-shadow: none;
@@ -173,6 +177,7 @@
         max-width: 400px;
       }
     }
+
     /* Meslekler Bölümü */
     .jobs-section {
       max-width: 900px;
@@ -186,10 +191,11 @@
     .jobs-section h2 {
       width: 100%;
       text-align: center;
-      color: var(--accent-color);
+      /* Beyaz yazı */
+      color: white;
       font-size: 2.2rem;
       margin-bottom: 20px;
-      text-shadow: 1px 1px 3px #000000aa;
+      text-shadow: none;
     }
     body.light-theme .jobs-section h2 {
       text-shadow: none;
@@ -203,22 +209,25 @@
       transition: background 0.3s;
       cursor: default;
       user-select: none;
-      color: var(--accent-color);
+      /* Beyaz yazı */
+      color: white;
       font-weight: 700;
     }
     body.light-theme .job-card {
       background: rgba(0, 0, 0, 0.05);
-      color: var(--accent-color);
+      color: white;
     }
     .job-card:hover {
       background: rgba(255, 255, 255, 0.2);
     }
+
     /* Altta slogan bölümü */
     .slogan-section {
       max-width: 600px;
       margin: 30px auto 0 auto;
       font-size: 1.5rem;
-      color: var(--accent-color);
+      /* Beyaz yazı */
+      color: white;
       font-weight: 700;
       text-align: center;
       text-shadow: 1px 1px 2px #000000cc;
@@ -229,6 +238,7 @@
     body.light-theme .slogan-section {
       text-shadow: none;
     }
+
     /* Tema değiştir butonu */
     #themeToggle {
       position: fixed;
@@ -248,93 +258,6 @@
     #themeToggle:hover {
       background: #cc0000;
       box-shadow: 0 0 15px #cc0000;
-    }
-    /* Yetkililer Bölümü */
-    .staff-section {
-      max-width: 900px;
-      margin: 40px auto 40px auto;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 15px;
-      box-shadow: 0 0 15px var(--accent-color);
-      color: var(--accent-color);
-      text-align: center;
-      user-select: none;
-    }
-    body.light-theme .staff-section {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--accent-color);
-      box-shadow: 0 0 10px var(--accent-color);
-    }
-    .staff-section h2 {
-      margin-top: 0;
-      margin-bottom: 25px;
-      font-size: 2.4rem;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-    body.light-theme .staff-section h2 {
-      text-shadow: none;
-    }
-    .staff-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-    }
-    .staff-card {
-      background: rgba(0,0,0,0.25);
-      border-radius: 12px;
-      padding: 15px 20px;
-      width: 220px;
-      box-shadow: 0 0 10px var(--accent-color);
-      text-align: center;
-      transition: background 0.3s;
-      cursor: default;
-      user-select: none;
-      color: var(--accent-color);
-      font-weight: 600;
-    }
-    body.light-theme .staff-card {
-      background: rgba(255,255,255,0.15);
-      color: var(--accent-color);
-    }
-    .staff-card:hover {
-      background: rgba(255, 255, 255, 0.25);
-    }
-    .staff-avatar {
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      margin-bottom: 10px;
-      object-fit: cover;
-      border: 2px solid var(--accent-color);
-      box-shadow: 0 0 8px var(--accent-color);
-    }
-    .staff-username {
-      font-size: 1.2rem;
-      margin-bottom: 6px;
-    }
-    .staff-role {
-      font-size: 1rem;
-      font-weight: 700;
-      color: #ffbbbb;
-      text-shadow: 1px 1px 2px #660000aa;
-    }
-    .status-online {
-      color: #4CAF50;
-      font-weight: 700;
-    }
-    .status-idle {
-      color: #FF9800;
-      font-weight: 700;
-    }
-    .status-dnd {
-      color: #F44336;
-      font-weight: 700;
-    }
-    .status-offline {
-      color: #777777;
-      font-weight: 700;
     }
   </style>
 </head>
@@ -380,166 +303,61 @@
       <h2>Meslekler</h2>
       <div class="job-card">Polis</div>
       <div class="job-card">İtfaiyeci</div>
+      <div class="job-card">Ambulans</div>
+      <div class="job-card">Suçlu</div>
       <div class="job-card">Taksi Şoförü</div>
-      <div class="job-card">Doktor</div>
-      <div class="job-card">Çöpçü</div>
+      <div class="job-card">Tüccar</div>
       <div class="job-card">Garson</div>
+      <div class="job-card">Mekancı</div>
     </section>
 
     <div class="slogan-section">
-      <p>GERÇEK BİR ROL OYUNU DENEYİMİ İÇİN NINEBORN</p>
+      <p>Ne olursan ol!<br />Eğer bişey olamazsan bu şehir seni yutar!</p>
     </div>
-
-    <!-- Yetkililer Bölümü -->
-    <section class="staff-section" aria-label="Yetkililer">
-      <h2>Yetkililer</h2>
-      <div class="staff-list" id="staffList">
-        <!-- JS ile doldurulacak -->
-      </div>
-    </section>
   </div>
 
   <script>
-    // Tema değiştirici
-    const themeToggleBtn = document.getElementById('themeToggle');
-    const bodyEl = document.body;
-
-    function setTheme(theme) {
-      if (theme === 'light') {
-        bodyEl.classList.add('light-theme');
-        localStorage.setItem('theme', 'light');
-      } else {
-        bodyEl.classList.remove('light-theme');
-        localStorage.setItem('theme', 'dark');
-      }
-    }
-
-    themeToggleBtn.addEventListener('click', () => {
-      if(bodyEl.classList.contains('light-theme')) {
-        setTheme('dark');
-      } else {
-        setTheme('light');
-      }
-    });
-
-    // Sayfa yüklenirken kaydedilen tema varsa uygula
-    const savedTheme = localStorage.getItem('theme');
-    if(savedTheme) {
-      setTheme(savedTheme);
-    }
-
-    // Loader ile ilgili
-    const loader = document.getElementById('loader');
-    const infoText = document.getElementById('infoText');
-    const progressBar = document.getElementById('progressBar');
-    const skipButton = document.getElementById('skipButton');
-    const mainContent = document.getElementById('mainContent');
-
-    let progress = 0;
-    const progressInterval = setInterval(() => {
-      progress += 1.5;
-      if(progress > 100) progress = 100;
-      progressBar.style.width = progress + '%';
-      infoText.textContent = `Yükleniyor... %${Math.floor(progress)}`;
-      if(progress >= 100) {
-        clearInterval(progressInterval);
-        showMainContent();
-      }
-    }, 40);
-
-    function showMainContent() {
-      loader.style.display = 'none';
-      mainContent.style.display = 'block';
-    }
-
-    skipButton.addEventListener('click', () => {
-      clearInterval(progressInterval);
-      showMainContent();
-    });
-
-    // Yetkililer ve Discord durumlarını Lanyard API ile çekme
-    const staff = [
-      {
-        id: '1178730276319412284',
-        role: 'Kurucu',
-      },
-      {
-        id: '696748061434487170',
-        role: 'Yönetici',
-      },
-      {
-        id: '123456789012345678',
-        role: 'Moderasyon',
-      },
-      // Buraya istediğin kadar yetkili ekleyebilirsin
+    const infoTexts = [
+      "Almanya'nın en tehlikeli sokakları burada!",
+      "Polis, ambulans, itfaiye... Hepsi hazır!",
+      "Yasal mısın, yoksa suçlu mu?",
+      "Kurallarına göre oyna, RP'ye saygı duy!",
+      "Sunucumuza hoş geldin!",
+      "NineBorn Roleplay Sadece Roleplay İle Kalmaz, Gerçekci olmaya çalışır..."
     ];
 
-    const staffListEl = document.getElementById('staffList');
+    let currentText = 0;
+    let progress = 0;
+    const progressBar = document.getElementById("progressBar");
+    const infoText = document.getElementById("infoText");
 
-    function getStatusClass(status) {
-      switch (status) {
-        case 'online': return 'status-online';
-        case 'idle': return 'status-idle';
-        case 'dnd': return 'status-dnd';
-        default: return 'status-offline';
+    const interval = setInterval(() => {
+      progress += 1;
+      progressBar.style.width = progress + "%";
+
+      if (progress % 20 === 0 && currentText < infoTexts.length) {
+        infoText.textContent = infoTexts[currentText];
+        currentText++;
       }
-    }
 
-    function loadStaff() {
-      staff.forEach(member => {
-        const card = document.createElement('div');
-        card.className = 'staff-card';
-        card.textContent = 'Yükleniyor...';
+      if (progress >= 100) {
+        clearInterval(interval);
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+      }
+    }, 50);
 
-        staffListEl.appendChild(card);
+    document.getElementById('skipButton').addEventListener('click', () => {
+      clearInterval(interval);
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    });
 
-        fetch(`https://api.lanyard.rest/v1/users/${member.id}`)
-          .then(res => res.json())
-          .then(data => {
-            if(data.success && data.data) {
-              const user = data.data.discord_user;
-              const status = data.data.discord_status;
-              const activities = data.data.activities || [];
-              let activityText = '';
-              if(activities.length > 0) {
-                // En aktif oyun / uygulama adı (varsa)
-                const gameActivity = activities.find(a => a.type === 0);
-                if(gameActivity) {
-                  activityText = `<br><small>Oynuyor: ${gameActivity.name}</small>`;
-                }
-              }
-
-              card.innerHTML = `
-                <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128" alt="${user.username} avatar" class="staff-avatar" />
-                <div class="staff-username">${user.username}#${user.discriminator}</div>
-                <div class="staff-role">${member.role}</div>
-                <div class="${getStatusClass(status)}">Durum: ${status}${activityText}</div>
-              `;
-            } else if(data.code === 'user_not_monitored') {
-              card.innerHTML = `
-                <div class="staff-username">Kullanıcı izlenmiyor</div>
-                <div class="staff-role">${member.role}</div>
-                <div class="status-offline">Durum bilgisi alınamadı</div>
-              `;
-            } else {
-              card.innerHTML = `
-                <div class="staff-username">Bilgi alınamadı</div>
-                <div class="staff-role">${member.role}</div>
-                <div class="status-offline">Durum bilgisi alınamadı</div>
-              `;
-            }
-          })
-          .catch(() => {
-            card.innerHTML = `
-              <div class="staff-username">Bağlantı hatası</div>
-              <div class="staff-role">${member.role}</div>
-              <div class="status-offline">Durum bilgisi alınamadı</div>
-            `;
-          });
-      });
-    }
-
-    loadStaff();
+    // Tema değiştirme
+    const themeToggleBtn = document.getElementById('themeToggle');
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+    });
   </script>
 </body>
 </html>
