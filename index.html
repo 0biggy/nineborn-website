@@ -7,28 +7,26 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-color-light: #f5f5f5;
-      --bg-color-dark: #121212;
-      --text-color-light: #121212;
-      --text-color-dark: #f5f5f5;
-      --box-bg-light: rgba(255, 255, 255, 0.9);
-      --box-bg-dark: rgba(0, 0, 0, 0.7);
-      --accent-color: #ff4444;
+      --background-dark: #121212;
+      --background-light: #f5f5f5;
+      --text-dark: #f5f5f5;
+      --text-light: #121212;
+      --accent-color: #ff6666;
+      --accent-color-dark: #cc0000;
     }
     body {
       margin: 0;
       padding: 0;
-      background: var(--bg-color-dark);
+      background-color: var(--background-dark);
       font-family: 'Orbitron', sans-serif;
-      color: var(--text-color-dark);
+      color: var(--text-dark);
       overflow: hidden;
-      transition: background 0.5s, color 0.5s;
+      transition: background-color 0.3s, color 0.3s;
     }
     body.light-theme {
-      background: var(--bg-color-light);
-      color: var(--text-color-light);
+      background-color: var(--background-light);
+      color: var(--text-light);
     }
-
     .loader-container {
       position: absolute;
       top: 50%;
@@ -39,10 +37,10 @@
     .logo {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      text-shadow: 2px 2px #00000099;
+      text-shadow: 2px 2px #000;
     }
     body.light-theme .logo {
-      text-shadow: none;
+      text-shadow: 2px 2px #ccc;
     }
     .info-text {
       font-size: 1.2rem;
@@ -52,19 +50,15 @@
     .progress-bar {
       width: 300px;
       height: 20px;
-      border: 2px solid var(--text-color-dark);
+      border: 2px solid currentColor;
       background-color: rgba(255, 255, 255, 0.1);
       margin: 0 auto;
       position: relative;
       border-radius: 10px;
       overflow: hidden;
-      transition: border-color 0.5s;
-    }
-    body.light-theme .progress-bar {
-      border-color: var(--text-color-light);
     }
     .progress {
-      background: linear-gradient(to right, var(--accent-color), #ff8a8a, #ffcccc);
+      background: linear-gradient(to right, red, orange, yellow);
       width: 0%;
       height: 100%;
       transition: width 0.2s;
@@ -73,39 +67,39 @@
       margin-top: 20px;
       padding: 8px 16px;
       font-size: 1rem;
-      background: var(--accent-color);
+      background: rgba(255,0,0,0.8);
       color: white;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 10px var(--accent-color);
+      box-shadow: 0 0 10px red;
       transition: background 0.3s, box-shadow 0.3s;
     }
     #skipButton:hover {
-      background: #cc0000;
-      box-shadow: 0 0 15px #cc0000;
+      background: rgba(255,0,0,1);
+      box-shadow: 0 0 15px red;
     }
     .main-content {
       display: none;
       padding: 40px 20px;
       text-align: center;
-      max-width: 1100px;
+      max-width: 900px;
       margin: 0 auto;
       overflow-y: auto;
       height: 100vh;
       box-sizing: border-box;
-      background: var(--box-bg-dark);
+      background: rgba(0,0,0,0.5);
       border-radius: 15px;
-      transition: background 0.5s, color 0.5s;
+      transition: background-color 0.3s, color 0.3s;
     }
     body.light-theme .main-content {
-      background: var(--box-bg-light);
-      color: var(--text-color-light);
+      background: rgba(245, 245, 245, 0.8);
+      color: var(--text-light);
     }
     .main-content h1 {
       font-size: 3rem;
       margin-bottom: 20px;
-      text-shadow: 1px 1px 5px #00000077;
+      text-shadow: 1px 1px 5px black;
     }
     body.light-theme .main-content h1 {
       text-shadow: none;
@@ -123,8 +117,8 @@
       transition: background 0.3s, box-shadow 0.3s;
     }
     .discord-button:hover, .play-button:hover {
-      background: #cc0000;
-      box-shadow: 0 0 20px #cc0000;
+      background: var(--accent-color-dark);
+      box-shadow: 0 0 20px var(--accent-color-dark);
     }
     .info-sections {
       display: flex;
@@ -132,7 +126,7 @@
       gap: 30px;
       flex-wrap: wrap;
       max-width: 1000px;
-      margin: 0 auto 50px auto;
+      margin: 0 auto 40px auto;
       text-align: left;
     }
     .info-box {
@@ -140,22 +134,25 @@
       padding: 20px 25px;
       border-radius: 10px;
       width: 300px;
-      box-shadow: 0 0 15px var(--accent-color);
-      transition: background 0.3s, color 0.3s;
+      box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+      transition: background 0.3s;
     }
     body.light-theme .info-box {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--text-color-light);
-      box-shadow: 0 0 10px var(--accent-color);
+      background: rgba(204, 0, 0, 0.1);
+      box-shadow: 0 0 15px rgba(204, 0, 0, 0.6);
+      color: var(--text-light);
     }
     .info-box:hover {
       background: rgba(255, 255, 255, 0.2);
+    }
+    body.light-theme .info-box:hover {
+      background: rgba(204, 0, 0, 0.2);
     }
     .info-box h2 {
       margin-top: 0;
       margin-bottom: 12px;
       color: var(--accent-color);
-      text-shadow: 1px 1px 3px #000000aa;
+      text-shadow: 1px 1px 3px black;
     }
     body.light-theme .info-box h2 {
       text-shadow: none;
@@ -163,6 +160,43 @@
     .info-box p {
       line-height: 1.5;
       font-size: 1rem;
+    }
+    /* Meslekler bölümü */
+    .jobs-section {
+      max-width: 600px;
+      margin: 0 auto 40px auto;
+      color: inherit;
+    }
+    .jobs-section h2 {
+      color: var(--accent-color);
+      text-align: center;
+      margin-bottom: 15px;
+    }
+    .jobs-section p {
+      font-weight: 600;
+      font-size: 1.2rem;
+      text-align: center;
+      margin: 0;
+    }
+    /* Tema değiştirme butonu */
+    #themeToggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: var(--accent-color);
+      border: none;
+      padding: 10px 15px;
+      color: white;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--accent-color);
+      transition: background 0.3s, box-shadow 0.3s;
+      z-index: 1000;
+    }
+    #themeToggle:hover {
+      background: var(--accent-color-dark);
+      box-shadow: 0 0 20px var(--accent-color-dark);
     }
     @media (max-width: 960px) {
       .info-sections {
@@ -173,62 +207,14 @@
         width: 90%;
         max-width: 400px;
       }
-    }
-
-    /* Meslekler Bölümü */
-    .jobs-section {
-      max-width: 900px;
-      margin: 0 auto 60px auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      text-align: center;
-    }
-    .job-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      width: 180px;
-      box-shadow: 0 0 15px var(--accent-color);
-      transition: background 0.3s;
-      cursor: default;
-      user-select: none;
-      color: var(--accent-color);
-      font-weight: 700;
-    }
-    body.light-theme .job-card {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--accent-color);
-    }
-    .job-card:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Tema değiştir butonu */
-    #themeToggle {
-      position: fixed;
-      top: 15px;
-      right: 15px;
-      background: var(--accent-color);
-      border: none;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 0 10px var(--accent-color);
-      transition: background 0.3s, box-shadow 0.3s;
-      z-index: 1000;
-    }
-    #themeToggle:hover {
-      background: #cc0000;
-      box-shadow: 0 0 15px #cc0000;
+      .jobs-section {
+        max-width: 90%;
+      }
     }
   </style>
 </head>
 <body>
-  <button id="themeToggle" title="Tema Değiştir">Siyah / Beyaz</button>
+  <button id="themeToggle" aria-label="Tema değiştir">Siyah / Beyaz</button>
 
   <div class="loader-container" id="loader">
     <div class="logo">NİneBorn Roleplay...</div>
@@ -241,8 +227,8 @@
 
   <div class="main-content" id="mainContent">
     <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
-    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
-    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
+    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button" rel="noopener noreferrer">Discord'a Katıl</a>
+    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button" rel="noopener noreferrer">Oyuna Katıl</a>
 
     <div class="info-sections">
       <div class="info-box">
@@ -266,14 +252,8 @@
     </div>
 
     <section class="jobs-section" aria-label="Meslekler">
-      <div class="job-card">Polis</div>
-      <div class="job-card">İtfaiyeci</div>
-      <div class="job-card">Ambulans</div>
-      <div class="job-card">Suçlu</div>
-      <div class="job-card">Taksi Şoförü</div>
-      <div class="job-card">Tüccar</div>
-      <div class="job-card">Garson</div>
-      <div class="job-card">Mekancı</div>
+      <h2>Meslekler</h2>
+      <p>Polis, İtfaiyeci, Ambulans, Suçlu, Taksi Şoförü, Tüccar, Garson, Mekancı</p>
     </section>
   </div>
 
@@ -314,7 +294,7 @@
       document.getElementById('mainContent').style.display = 'block';
     });
 
-    // Tema değiştirme
+    // Tema değiştirme butonu
     const themeToggleBtn = document.getElementById('themeToggle');
     themeToggleBtn.addEventListener('click', () => {
       document.body.classList.toggle('light-theme');
