@@ -54,6 +54,23 @@
       transition: width 0.2s;
     }
 
+    #skipButton {
+      margin-top: 20px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      background: rgba(255,0,0,0.8);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px red;
+    }
+
+    #skipButton:hover {
+      background: rgba(255,0,0,1);
+      box-shadow: 0 0 15px red;
+    }
+
     .main-content {
       display: none;
       padding: 40px;
@@ -84,6 +101,7 @@
     <div class="progress-bar">
       <div class="progress" id="progressBar"></div>
     </div>
+    <button id="skipButton">Atla</button>
   </div>
 
   <div class="main-content" id="mainContent">
@@ -121,6 +139,12 @@
         document.getElementById("mainContent").style.display = "block";
       }
     }, 50);
+
+    document.getElementById('skipButton').addEventListener('click', () => {
+      clearInterval(interval);
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    });
   </script>
 </body>
 </html>
