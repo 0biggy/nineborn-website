@@ -87,10 +87,70 @@
       text-align: center;
     }
 
-    .main-content h1 {
+    /* Glitch efekt CSS */
+    .glitch {
+      position: relative;
+      color: var(--accent-color);
+      font-weight: 900;
       font-size: 3rem;
-      margin-bottom: 20px;
       text-shadow: 1px 1px 5px #00000077;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      right: 0;
+      opacity: 0.8;
+      clip-path: polygon(0 2%, 100% 2%, 100% 30%, 0 30%);
+      animation: glitch-anim 2s infinite linear alternate-reverse;
+    }
+
+    .glitch::before {
+      left: 2px;
+      text-shadow: -2px 0 red;
+      animation-delay: -0.3s;
+      clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+    }
+
+    .glitch::after {
+      left: -2px;
+      text-shadow: -2px 0 blue;
+      animation-delay: 0.3s;
+      clip-path: polygon(0 30%, 100% 30%, 100% 60%, 0 60%);
+    }
+
+    @keyframes glitch-anim {
+      0% {
+        clip-path: polygon(0 2%, 100% 2%, 100% 30%, 0 30%);
+        transform: translate(0);
+      }
+      20% {
+        clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%);
+        transform: translate(-2px, -2px);
+      }
+      40% {
+        clip-path: polygon(0 0, 100% 0, 100% 20%, 0 20%);
+        transform: translate(2px, 2px);
+      }
+      60% {
+        clip-path: polygon(0 30%, 100% 30%, 100% 60%, 0 60%);
+        transform: translate(-1px, 1px);
+      }
+      80% {
+        clip-path: polygon(0 10%, 100% 10%, 100% 40%, 0 40%);
+        transform: translate(1px, -1px);
+      }
+      100% {
+        clip-path: polygon(0 2%, 100% 2%, 100% 30%, 0 30%);
+        transform: translate(0);
+      }
+    }
+
+    .main-content h1 {
+      margin-bottom: 20px;
+      /* font-size ve diğer stiller glitch sınıfında */
     }
 
     .discord-button, .play-button {
@@ -277,7 +337,9 @@
   </div>
 
   <div class="main-content" id="mainContent">
-    <h1>NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!</h1>
+    <h1 class="glitch" data-text="NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!">
+      NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!
+    </h1>
     <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
     <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
 
@@ -316,68 +378,81 @@
   <!-- Kurallar Modal -->
   <div id="rulesModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
     <div class="content-box">
-      <h2 id="rulesTitle">Site Kurallarını Kabul Edin</h2>
+      <h2 id="rulesTitle">Sunucu Kuralları</h2>
       <p>
-        Lütfen siteye devam etmek için aşağıdaki kuralları okuyup kabul ediniz:<br><br>
-        1. Saygılı olun.<br>
-        2. Küfür ve hakaret yasaktır.<br>
-        3. Gerçek RP yapın.<br>
-        4. Yetkililerin uyarılarına uyun.<br>
-        5. Hile ve kötü davranışlara izin verilmez.<br><br>
-        Kuralları kabul etmeden siteye erişim sağlanamaz.
+        1. Küfür ve hakaret yasaktır.<br />
+        2. TCK kurallarına uyulmalıdır.<br />
+        3. Reklam yapmak yasaktır.<br />
+        4. Yetkili talimatlarına uyulmalıdır.<br />
+        5. İyi RP yapılmalıdır.<br />
+        6. Hile ve exploit kesinlikle yasaktır.
       </p>
       <button id="acceptRulesBtn">Kuralları Kabul Ediyorum</button>
     </div>
   </div>
 
   <script>
-    const infoTexts = [
-      "Almanya'nın en tehlikeli sokakları seni bekliyor!",
-      "Polis, ambulans, itfaiye... Görev başında!",
-      "Yasal biri misin, yoksa suç dünyasına mı adım atacaksın?",
-      "Kurallara uy, RP'ye saygı duy!",
-      "Sunucumuza hoş geldin!",
-      "NineBorn: Gerçekçiliğin ve rol yapmanın buluşma noktası."
+    // Loader & progress bar
+    const progressBar = document.getElementById('progressBar');
+    const infoText = document.getElementById('infoText');
+    const loader = document.getElementById('loader');
+    const mainContent = document.getElementById('mainContent');
+    const skipButton = document.getElementById('skipButton');
+    const rulesModal = document.getElementById('rulesModal');
+    const acceptRulesBtn = document.getElementById('acceptRulesBtn');
+
+    let progress = 0;
+    let loadingMessages = [
+      'Sunucuya Bağlanılıyor...',
+      'Veriler Yükleniyor...',
+      'Harita Hazırlanıyor...',
+      'Son Kontroller Yapılıyor...',
+      'Yükleme Tamamlanıyor...'
     ];
 
-    let currentText = 0;
-    let progress = 0;
-    const progressBar = document.getElementById("progressBar");
-    const infoText = document.getElementById("infoText");
-    const loader = document.getElementById("loader");
-    const mainContent = document.getElementById("mainContent");
-    const rulesModal = document.getElementById("rulesModal");
-    const acceptRulesBtn = document.getElementById("acceptRulesBtn");
-
-    const interval = setInterval(() => {
-      progress += 1;
-      progressBar.style.width = progress + "%";
-
-      if (progress % 20 === 0 && currentText < infoTexts.length) {
-        infoText.textContent = infoTexts[currentText];
-        currentText++;
-      }
-
-      if (progress >= 100) {
-        clearInterval(interval);
-        loader.style.display = "none";
-        // Kurallar modalını göster
-        rulesModal.classList.remove("hidden");
-      }
-    }, 50);
-
-    document.getElementById('skipButton').addEventListener('click', () => {
-      clearInterval(interval);
+    // Show modal if not accepted
+    if (!localStorage.getItem('rulesAccepted')) {
       loader.style.display = 'none';
-      rulesModal.classList.remove("hidden");
-    });
+      rulesModal.classList.remove('hidden');
+    } else {
+      startLoading();
+    }
 
     acceptRulesBtn.addEventListener('click', () => {
-      // Kuralları kabul edince
-      rulesModal.classList.add("hidden");
-      mainContent.style.display = "block";
-      document.body.style.overflow = "auto"; // Scroll açılır
+      localStorage.setItem('rulesAccepted', 'true');
+      rulesModal.classList.add('hidden');
+      loader.style.display = 'block';
+      startLoading();
     });
+
+    function startLoading() {
+      let messageIndex = 0;
+      infoText.textContent = loadingMessages[messageIndex];
+      const interval = setInterval(() => {
+        if (progress >= 100) {
+          clearInterval(interval);
+          loader.style.display = 'none';
+          mainContent.style.display = 'block';
+          return;
+        }
+        progress += 1;
+        progressBar.style.width = progress + '%';
+
+        if (progress % 20 === 0 && messageIndex < loadingMessages.length - 1) {
+          messageIndex++;
+          infoText.textContent = loadingMessages[messageIndex];
+        }
+      }, 50);
+
+      skipButton.addEventListener('click', () => {
+        progress = 100;
+        progressBar.style.width = '100%';
+        infoText.textContent = 'Yükleme Atlandı.';
+        clearInterval(interval);
+        loader.style.display = 'none';
+        mainContent.style.display = 'block';
+      });
+    }
   </script>
 </body>
 </html>
