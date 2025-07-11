@@ -13,7 +13,7 @@
       --text-color-dark: #f5f5f5;
       --box-bg-light: rgba(255, 255, 255, 0.9);
       --box-bg-dark: rgba(0, 0, 0, 0.7);
-      --accent-color: #ff4444; /* Kırmızı ama artık sadece arka plan, yazılarda kullanılmıyor */
+      --accent-color: #ffffff; /* Beyaz renk yaptık */
     }
     body {
       margin: 0;
@@ -64,7 +64,7 @@
       border-color: var(--text-color-light);
     }
     .progress {
-      background: linear-gradient(to right, var(--accent-color), #ff8a8a, #ffcccc);
+      background: linear-gradient(to right, var(--accent-color), #ffffff, #ffffff);
       width: 0%;
       height: 100%;
       transition: width 0.2s;
@@ -74,7 +74,7 @@
       padding: 8px 16px;
       font-size: 1rem;
       background: var(--accent-color);
-      color: white;
+      color: black; /* Buton yazısını siyah yaptım beyaz zemin için */
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -82,8 +82,8 @@
       transition: background 0.3s, box-shadow 0.3s;
     }
     #skipButton:hover {
-      background: #cc0000;
-      box-shadow: 0 0 15px #cc0000;
+      background: #e6e6e6;
+      box-shadow: 0 0 15px #e6e6e6;
     }
     .main-content {
       display: none;
@@ -106,6 +106,7 @@
       font-size: 3rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px #00000077;
+      color: var(--accent-color);
     }
     body.light-theme .main-content h1 {
       text-shadow: none;
@@ -114,7 +115,7 @@
       display: inline-block;
       background: var(--accent-color);
       padding: 12px 28px;
-      color: white;
+      color: black; /* Beyaz arka plana siyah yazı */
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
@@ -123,8 +124,8 @@
       transition: background 0.3s, box-shadow 0.3s;
     }
     .discord-button:hover, .play-button:hover {
-      background: #cc0000;
-      box-shadow: 0 0 20px #cc0000;
+      background: #e6e6e6;
+      box-shadow: 0 0 20px #e6e6e6;
     }
     .info-sections {
       display: flex;
@@ -142,12 +143,12 @@
       width: 300px;
       box-shadow: 0 0 15px var(--accent-color);
       transition: background 0.3s, color 0.3s;
-      /* Kırmızı yazı yerine beyaz yapıldı: */
-      color: white;
+      color: var(--accent-color);
+      font-weight: 700;
     }
     body.light-theme .info-box {
       background: rgba(0, 0, 0, 0.05);
-      color: var(--text-color-light);
+      color: var(--accent-color);
       box-shadow: 0 0 10px var(--accent-color);
     }
     .info-box:hover {
@@ -156,9 +157,8 @@
     .info-box h2 {
       margin-top: 0;
       margin-bottom: 12px;
-      /* Kırmızı yerine beyaz: */
-      color: white;
-      text-shadow: none;
+      color: var(--accent-color);
+      text-shadow: 1px 1px 3px #000000aa;
     }
     body.light-theme .info-box h2 {
       text-shadow: none;
@@ -191,11 +191,10 @@
     .jobs-section h2 {
       width: 100%;
       text-align: center;
-      /* Beyaz yazı */
-      color: white;
+      color: var(--accent-color);
       font-size: 2.2rem;
       margin-bottom: 20px;
-      text-shadow: none;
+      text-shadow: 1px 1px 3px #000000aa;
     }
     body.light-theme .jobs-section h2 {
       text-shadow: none;
@@ -209,13 +208,12 @@
       transition: background 0.3s;
       cursor: default;
       user-select: none;
-      /* Beyaz yazı */
-      color: white;
+      color: var(--accent-color);
       font-weight: 700;
     }
     body.light-theme .job-card {
       background: rgba(0, 0, 0, 0.05);
-      color: white;
+      color: var(--accent-color);
     }
     .job-card:hover {
       background: rgba(255, 255, 255, 0.2);
@@ -226,8 +224,7 @@
       max-width: 600px;
       margin: 30px auto 0 auto;
       font-size: 1.5rem;
-      /* Beyaz yazı */
-      color: white;
+      color: var(--accent-color);
       font-weight: 700;
       text-align: center;
       text-shadow: 1px 1px 2px #000000cc;
@@ -246,7 +243,7 @@
       right: 15px;
       background: var(--accent-color);
       border: none;
-      color: white;
+      color: black;
       padding: 10px 16px;
       border-radius: 8px;
       font-weight: bold;
@@ -256,8 +253,8 @@
       z-index: 1000;
     }
     #themeToggle:hover {
-      background: #cc0000;
-      box-shadow: 0 0 15px #cc0000;
+      background: #e6e6e6;
+      box-shadow: 0 0 15px #e6e6e6;
     }
   </style>
 </head>
