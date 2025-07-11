@@ -7,20 +7,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-color-dark: #121212;
-      --text-color-dark: #f5f5f5;
-      --box-bg-dark: rgba(0, 0, 0, 0.7);
-      --accent-color: #ffffff; /* Beyaz */
+      --bg-color: #121212;
+      --text-color: #f5f5f5;
+      --box-bg: rgba(0, 0, 0, 0.7);
+      --accent-color: #ffffff;
     }
-    body {
+    * {
       margin: 0;
       padding: 0;
-      background: var(--bg-color-dark);
+      box-sizing: border-box;
+    }
+    body {
+      background: var(--bg-color);
       font-family: 'Orbitron', sans-serif;
-      color: var(--text-color-dark);
+      color: var(--text-color);
       overflow: hidden;
     }
-
     .loader-container {
       position: absolute;
       top: 50%;
@@ -43,15 +45,14 @@
     .progress-bar {
       width: 300px;
       height: 20px;
-      border: 2px solid var(--text-color-dark);
+      border: 2px solid var(--text-color);
       background-color: rgba(255, 255, 255, 0.1);
       margin: 0 auto;
-      position: relative;
       border-radius: 10px;
       overflow: hidden;
     }
     .progress {
-      background: linear-gradient(to right, var(--accent-color), #ffffff, #ffffff);
+      background: linear-gradient(to right, var(--accent-color), #ffffff);
       width: 0%;
       height: 100%;
       transition: width 0.2s;
@@ -61,7 +62,7 @@
       padding: 8px 16px;
       font-size: 1rem;
       background: var(--accent-color);
-      color: black; /* Siyah yazı */
+      color: black;
       border: none;
       border-radius: 8px;
       cursor: pointer;
@@ -72,56 +73,52 @@
       background: #e6e6e6;
       box-shadow: 0 0 15px #e6e6e6;
     }
+
     .main-content {
       display: none;
       padding: 40px 20px;
-      text-align: center;
       max-width: 1100px;
       margin: 0 auto;
       overflow-y: auto;
       height: 100vh;
-      box-sizing: border-box;
-      background: var(--box-bg-dark);
+      background: var(--box-bg);
       border-radius: 15px;
       color: var(--accent-color);
+      text-align: center;
     }
+
     .main-content h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px #00000077;
-      color: var(--accent-color);
     }
+
     .discord-button, .play-button {
       display: inline-block;
       background: var(--accent-color);
-      color: black; /* Yazı siyah */
+      color: black;
       border-radius: 6px;
       padding: 12px 28px;
       text-decoration: none;
       font-weight: bold;
       box-shadow: 0 0 12px var(--accent-color);
       margin: 10px 15px 30px 15px;
-      cursor: pointer;
-      transition: background 0.3s, box-shadow 0.3s, color 0.3s;
-      opacity: 1;
-      user-select: none;
-      position: relative;
-      z-index: 10;
+      transition: 0.3s;
     }
+
     .discord-button:hover, .play-button:hover {
       background: #e6e6e6;
       box-shadow: 0 0 20px #e6e6e6;
-      color: black;
     }
+
     .info-sections {
       display: flex;
       justify-content: center;
       gap: 30px;
       flex-wrap: wrap;
-      max-width: 1000px;
-      margin: 0 auto 50px auto;
-      text-align: left;
+      margin-bottom: 50px;
     }
+
     .info-box {
       background: rgba(255, 255, 255, 0.1);
       padding: 20px 25px;
@@ -130,21 +127,22 @@
       box-shadow: 0 0 15px var(--accent-color);
       color: var(--accent-color);
       font-weight: 700;
-      transition: background 0.3s, color 0.3s;
     }
+
     .info-box:hover {
       background: rgba(255, 255, 255, 0.2);
     }
+
     .info-box h2 {
-      margin-top: 0;
       margin-bottom: 12px;
-      color: var(--accent-color);
       text-shadow: 1px 1px 3px #000000aa;
     }
+
     .info-box p {
       line-height: 1.5;
       font-size: 1rem;
     }
+
     @media (max-width: 960px) {
       .info-sections {
         flex-direction: column;
@@ -157,46 +155,41 @@
     }
 
     .jobs-section {
-      max-width: 900px;
-      margin: 0 auto 20px auto;
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
-      text-align: center;
+      margin-bottom: 20px;
     }
+
     .jobs-section h2 {
       width: 100%;
-      text-align: center;
-      color: var(--accent-color);
       font-size: 2.2rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 3px #000000aa;
     }
+
     .job-card {
       background: rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       padding: 20px;
       width: 180px;
       box-shadow: 0 0 15px var(--accent-color);
-      cursor: default;
-      user-select: none;
       color: var(--accent-color);
       font-weight: 700;
       transition: background 0.3s;
     }
+
     .job-card:hover {
       background: rgba(255, 255, 255, 0.2);
     }
+
     .slogan-section {
       max-width: 600px;
-      margin: 30px auto 0 auto;
+      margin: 30px auto 0;
       font-size: 1.5rem;
-      color: var(--accent-color);
       font-weight: 700;
-      text-align: center;
       text-shadow: 1px 1px 2px #000000cc;
-      user-select: none;
       line-height: 1.4;
     }
   </style>
@@ -204,7 +197,7 @@
 <body>
 
   <div class="loader-container" id="loader">
-    <div class="logo">NİneBorn Roleplay...</div>
+    <div class="logo">NineBorn Roleplay</div>
     <div class="info-text" id="infoText">Yükleniyor...</div>
     <div class="progress-bar">
       <div class="progress" id="progressBar"></div>
@@ -213,28 +206,22 @@
   </div>
 
   <div class="main-content" id="mainContent">
-    <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
+    <h1>NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!</h1>
     <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
     <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
 
     <div class="info-sections">
       <div class="info-box">
-        <h2>Neden Kurduk?</h2>
-        <p>
-          NineBorn Roleplay, gerçekçi bir Almanya sokak RP deneyimi sunmak için kuruldu. Amacımız kaliteli ve eğlenceli roleplay ortamı yaratmak.
-        </p>
+        <h2>Neden Kurulduk?</h2>
+        <p>NineBorn Roleplay, Almanya sokaklarında gerçekçi bir RP deneyimi sunmak için kuruldu. Amacımız kaliteli ve eğlenceli bir ortam oluşturmak.</p>
       </div>
       <div class="info-box">
         <h2>Biz Kimiz?</h2>
-        <p>
-          Biz tutkulu RP oyuncularıyız. Oyuncuların eğlenmesi ve kendini geliştirmesi için sürekli destek veriyoruz.
-        </p>
+        <p>Tutkulu RP severleriz. Oyunculara destek olmak, keyifli bir ortam sunmak ve gelişimlerine katkı sağlamak önceliğimizdir.</p>
       </div>
       <div class="info-box">
         <h2>Vizyonumuz</h2>
-        <p>
-          En kaliteli ve en aktif Almanya RP sunucusu olmak, oyunculara unutulmaz anlar yaşatmak.
-        </p>
+        <p>En kaliteli ve en aktif Almanya RP sunucusu olmak; oyunculara unutulmaz anlar yaşatmak.</p>
       </div>
     </div>
 
@@ -247,22 +234,22 @@
       <div class="job-card">Taksi Şoförü</div>
       <div class="job-card">Tüccar</div>
       <div class="job-card">Garson</div>
-      <div class="job-card">Mekancı</div>
+      <div class="job-card">Mekanik</div>
     </section>
 
     <div class="slogan-section">
-      <p>Ne olursan ol!<br />Eğer bişey olamazsan bu şehir seni yutar!</p>
+      <p>Ne olursan ol!<br />Eğer bir şey olamazsan, bu şehir seni yutar!</p>
     </div>
   </div>
 
   <script>
     const infoTexts = [
-      "Almanya'nın en tehlikeli sokakları burada!",
-      "Polis, ambulans, itfaiye... Hepsi hazır!",
-      "Yasal mısın, yoksa suçlu mu?",
-      "Kurallarına göre oyna, RP'ye saygı duy!",
+      "Almanya'nın en tehlikeli sokakları seni bekliyor!",
+      "Polis, ambulans, itfaiye... Görev başında!",
+      "Yasal biri misin, yoksa suç dünyasına mı adım atacaksın?",
+      "Kurallara uy, RP'ye saygı duy!",
       "Sunucumuza hoş geldin!",
-      "NineBorn Roleplay Sadece Roleplay İle Kalmaz, Gerçekci olmaya çalışır..."
+      "NineBorn: Gerçekçiliğin ve rol yapmanın buluşma noktası."
     ];
 
     let currentText = 0;
@@ -292,6 +279,5 @@
       document.getElementById('mainContent').style.display = 'block';
     });
   </script>
-
 </body>
 </html>
