@@ -164,7 +164,7 @@
     /* Meslekler bölümü */
     .jobs-section {
       max-width: 600px;
-      margin: 0 auto 40px auto;
+      margin: 0 auto 10px auto;
       color: inherit;
     }
     .jobs-section h2 {
@@ -176,7 +176,18 @@
       font-weight: 600;
       font-size: 1.2rem;
       text-align: center;
-      margin: 0;
+      margin: 0 0 15px 0;
+    }
+    .jobs-footer {
+      font-style: italic;
+      font-size: 1rem;
+      text-align: center;
+      color: var(--accent-color);
+      margin-top: 0;
+      text-shadow: 1px 1px 2px black;
+    }
+    body.light-theme .jobs-footer {
+      text-shadow: none;
     }
     /* Tema değiştirme butonu */
     #themeToggle {
@@ -254,6 +265,7 @@
     <section class="jobs-section" aria-label="Meslekler">
       <h2>Meslekler</h2>
       <p>Polis, İtfaiyeci, Ambulans, Suçlu, Taksi Şoförü, Tüccar, Garson, Mekancı</p>
+      <p class="jobs-footer">Ne olursan ol!<br />Eğer bişey olamazsan bu şehir seni yutar!</p>
     </section>
   </div>
 
