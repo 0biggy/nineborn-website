@@ -46,6 +46,9 @@
       z-index: 2000;
       user-select: none;
       box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
     /* Loader ve diğer stiller */
@@ -392,51 +395,89 @@
       "Almanya'nın en tehlikeli sokakları burada!",
       "Polis, ambulans, itfaiye... Hepsi hazır!",
       "Yasal mısın, yoksa suçlu mu?",
-      "Kurallarına göre oyna, RP'ye saygı duy!",
-      "Sunucumuza hoş geldin!",
-      "NineBorn Roleplay Sadece Roleplay İle Kalmaz, Gerçekci olmaya çalışır..."
+      "Mekancı ile aracını tamir et!",
+      "Garson olarak müşterilerini mutlu et!",
+      "Taksi şoförlüğü ile para kazan!",
+      "Sokaklar senin, kurallar bizden!",
     ];
 
-    let currentText = 0;
-    let progress = 0;
     const progressBar = document.getElementById("progressBar");
     const infoText = document.getElementById("infoText");
     const loader = document.getElementById("loader");
     const mainContent = document.getElementById("mainContent");
     const updateBanner = document.getElementById("updateBanner");
+    const skipButton = document.getElementById("skipButton");
+    const themeToggle = document.getElementById("themeToggle");
+    const body = document.body;
 
-    const interval = setInterval(() => {
-      progress += 1;
-      progressBar.style.width = progress + "%";
-      progressBar.setAttribute('aria-valuenow', progress);
+    let progress = 0;
+    let infoIndex = 0;
+    let interval = null;
+    let slowLoadTimer = null;
+    let isInternetBad = false;
 
-      if (progress % 20 === 0 && currentText < infoTexts.length) {
-        infoText.textContent = infoTexts[currentText];
-        currentText++;
+    // Temayı saklamak için localStorage
+    if(localStorage.getItem("theme") === "light") {
+      body.classList.add("light");
+    }
+
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("light");
+      if(body.classList.contains("light")) {
+        localStorage.setItem("theme", "light");
+      } else {
+        localStorage.removeItem("theme");
       }
+    });
 
-      if (progress >= 100) {
+    // Progress ve info güncelleme
+    function updateProgress() {
+      if(progress >= 100) {
         clearInterval(interval);
-        loader.style.display = "none";
-        mainContent.style.display = "block";
-        updateBanner.style.display = "none";
-        mainContent.focus();
+        if(!isInternetBad) {
+          // Yükleme bittiğinde ana içeriği göster
+          loader.style.display = "none";
+          mainContent.style.display = "block";
+          updateBanner.style.display = "none";
+          mainContent.focus();
+        }
+        return;
       }
-    }, 50);
 
-    document.getElementById('skipButton').addEventListener('click', () => {
+      progress += Math.floor(Math.random() * 8) + 3; // 3-10 arası artış
+      if(progress > 100) progress = 100;
+
+      progressBar.style.width = progress + "%";
+      progressBar.setAttribute("aria-valuenow", progress);
+
+      infoText.textContent = infoTexts[infoIndex];
+      infoIndex = (infoIndex + 1) % infoTexts.length;
+    }
+
+    interval = setInterval(updateProgress, 700);
+
+    // 8 saniyede %20 ilerleyemediyse internet kötü sayalım
+    slowLoadTimer = setTimeout(() => {
+      if(progress < 20) {
+        // İnternet kötü, hata göster
+        isInternetBad = true;
+        clearInterval(interval);
+        updateBanner.innerHTML = '⚠️ Site yüklenemedi, lütfen internetinizi kapatıp açın.';
+        updateBanner.style.backgroundColor = '#cc0000';
+        infoText.textContent = '';
+        progressBar.style.width = '0%';
+        skipButton.style.display = "none";
+      }
+    }, 8000);
+
+    // Atla butonu
+    skipButton.addEventListener("click", () => {
       clearInterval(interval);
+      clearTimeout(slowLoadTimer);
       loader.style.display = "none";
       mainContent.style.display = "block";
       updateBanner.style.display = "none";
       mainContent.focus();
-    });
-
-    // Tema değiştirme
-    const themeToggle = document.getElementById("themeToggle");
-    const body = document.body;
-    themeToggle.addEventListener("click", () => {
-      body.classList.toggle("light");
     });
   </script>
 </body>
