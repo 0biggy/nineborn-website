@@ -192,6 +192,77 @@
       text-shadow: 1px 1px 2px #000000cc;
       line-height: 1.4;
     }
+
+    /* Modal overlay and content */
+    #rulesModal {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      color: var(--accent-color);
+      padding: 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+      line-height: 1.5;
+      flex-direction: column;
+      border-radius: 10px;
+    }
+
+    #rulesModal.hidden {
+      display: none;
+    }
+
+    #rulesModal .content-box {
+      background: var(--box-bg);
+      padding: 30px 25px;
+      border-radius: 15px;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 0 20px var(--accent-color);
+    }
+
+    #rulesModal h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      text-shadow: 1px 1px 4px #000000bb;
+    }
+
+    #rulesModal p {
+      margin-bottom: 30px;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #ddd;
+      max-height: 250px;
+      overflow-y: auto;
+      text-align: left;
+      line-height: 1.4;
+      border: 1px solid #ccc2;
+      padding: 15px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.1);
+    }
+
+    #acceptRulesBtn {
+      background: var(--accent-color);
+      color: black;
+      padding: 12px 28px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 12px var(--accent-color);
+      transition: background 0.3s, box-shadow 0.3s;
+      font-size: 1.1rem;
+    }
+
+    #acceptRulesBtn:hover {
+      background: #e6e6e6;
+      box-shadow: 0 0 20px #e6e6e6;
+    }
   </style>
 </head>
 <body>
@@ -242,6 +313,23 @@
     </div>
   </div>
 
+  <!-- Kurallar Modal -->
+  <div id="rulesModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+    <div class="content-box">
+      <h2 id="rulesTitle">Site Kurallarını Kabul Edin</h2>
+      <p>
+        Lütfen siteye devam etmek için aşağıdaki kuralları okuyup kabul ediniz:<br><br>
+        1. Saygılı olun.<br>
+        2. Küfür ve hakaret yasaktır.<br>
+        3. Gerçek RP yapın.<br>
+        4. Yetkililerin uyarılarına uyun.<br>
+        5. Hile ve kötü davranışlara izin verilmez.<br><br>
+        Kuralları kabul etmeden siteye erişim sağlanamaz.
+      </p>
+      <button id="acceptRulesBtn">Kuralları Kabul Ediyorum</button>
+    </div>
+  </div>
+
   <script>
     const infoTexts = [
       "Almanya'nın en tehlikeli sokakları seni bekliyor!",
@@ -256,6 +344,10 @@
     let progress = 0;
     const progressBar = document.getElementById("progressBar");
     const infoText = document.getElementById("infoText");
+    const loader = document.getElementById("loader");
+    const mainContent = document.getElementById("mainContent");
+    const rulesModal = document.getElementById("rulesModal");
+    const acceptRulesBtn = document.getElementById("acceptRulesBtn");
 
     const interval = setInterval(() => {
       progress += 1;
@@ -268,15 +360,23 @@
 
       if (progress >= 100) {
         clearInterval(interval);
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
+        loader.style.display = "none";
+        // Kurallar modalını göster
+        rulesModal.classList.remove("hidden");
       }
     }, 50);
 
     document.getElementById('skipButton').addEventListener('click', () => {
       clearInterval(interval);
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
+      loader.style.display = 'none';
+      rulesModal.classList.remove("hidden");
+    });
+
+    acceptRulesBtn.addEventListener('click', () => {
+      // Kuralları kabul edince
+      rulesModal.classList.add("hidden");
+      mainContent.style.display = "block";
+      document.body.style.overflow = "auto"; // Scroll açılır
     });
   </script>
 </body>
