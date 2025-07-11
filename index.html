@@ -4,24 +4,27 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>glitch - Site Bakımda</title>
+        <title>Site Bakımda - glitch</title>
         <meta name="robots" content="noindex,nofollow" />
       </Head>
-      <div className="container">
-        <h1 className="glitch" data-text="glitch">glitch</h1>
+      <main className="container">
+        <h1 className="glitch" data-text="glitch">
+          glitch
+        </h1>
         <p className="info-text">Bakım Saati: 03:00 - 05:00 (GMT+3)</p>
+        <p className="sub-text">Sitemiz üzerinde bazı güncellemeler yapıyoruz. Lütfen biraz sonra tekrar deneyin.</p>
 
         <style jsx>{`
           .container {
-            background: #000;
-            color: #0ff;
+            background: #fff;
+            color: #111;
             height: 100vh;
             margin: 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            flex-direction: column;
-            font-family: 'Courier New', Courier, monospace;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             padding: 20px;
           }
@@ -29,9 +32,11 @@ export default function Home() {
           .glitch {
             position: relative;
             font-size: 6rem;
+            font-weight: 900;
+            letter-spacing: 0.15em;
+            color: #000;
+            user-select: none;
             text-transform: uppercase;
-            letter-spacing: 4px;
-            margin-bottom: 20px;
           }
 
           .glitch::before,
@@ -40,63 +45,76 @@ export default function Home() {
             position: absolute;
             left: 0;
             width: 100%;
-            overflow: hidden;
-            color: #0ff;
-            clip: rect(0, 900px, 0, 0);
+            opacity: 0.7;
+            user-select: none;
           }
 
           .glitch::before {
             animation: glitchTop 2s infinite linear alternate-reverse;
-            color: #f0f;
+            color: #ff3c78;
+            clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
           }
 
           .glitch::after {
-            animation: glitchBottom 1.5s infinite linear alternate-reverse;
-            color: #0ff;
+            animation: glitchBottom 3s infinite linear alternate-reverse;
+            color: #1db954;
+            clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
           }
 
           .info-text {
-            color: #fff;
-            font-size: 1.2rem;
+            margin-top: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+          }
+
+          .sub-text {
             margin-top: 10px;
-            opacity: 0.8;
+            font-size: 1rem;
+            color: #666;
+            max-width: 400px;
           }
 
           @keyframes glitchTop {
             0% {
-              clip: rect(0, 9999px, 0, 0);
-            }
-            10% {
-              clip: rect(5px, 9999px, 40px, 0);
-              transform: translate(-3px, -2px);
+              transform: translate(0);
             }
             20% {
-              clip: rect(10px, 9999px, 60px, 0);
+              transform: translate(-3px, -2px);
+            }
+            40% {
               transform: translate(3px, 2px);
             }
+            60% {
+              transform: translate(-3px, 0);
+            }
+            80% {
+              transform: translate(3px, -2px);
+            }
             100% {
-              clip: rect(0, 9999px, 0, 0);
+              transform: translate(0);
             }
           }
 
           @keyframes glitchBottom {
             0% {
-              clip: rect(0, 9999px, 0, 0);
+              transform: translate(0);
             }
-            10% {
-              clip: rect(60px, 9999px, 90px, 0);
-              transform: translate(3px, 1px);
+            25% {
+              transform: translate(3px, 2px);
             }
-            20% {
-              clip: rect(50px, 9999px, 80px, 0);
-              transform: translate(-3px, -1px);
+            50% {
+              transform: translate(-3px, -2px);
+            }
+            75% {
+              transform: translate(3px, 0);
             }
             100% {
-              clip: rect(0, 9999px, 0, 0);
+              transform: translate(0);
             }
           }
         `}</style>
-      </div>
+      </main>
     </>
   );
 }
