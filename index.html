@@ -7,84 +7,167 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg-color-light: #f5f5f5;
-      --bg-color-dark: #121212;
-      --text-color-light: #121212;
-      --text-color-dark: #f5f5f5;
-      --box-bg-light: rgba(255, 255, 255, 0.9);
-      --box-bg-dark: rgba(0, 0, 0, 0.7);
-      --accent-color: #ffffff; /* Beyaz renk yaptık */
+      --bg-dark: #121212;
+      --text-dark: #e0e0e0;
+      --bg-light: #f5f5f5;
+      --text-light: #121212;
+      --accent-light: #000000;
+      --accent-dark: #ffffff;
+      --highlight-color: #ffcc00;
     }
     body {
       margin: 0;
       padding: 0;
-      background: var(--bg-color-dark);
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
       font-family: 'Orbitron', sans-serif;
-      color: var(--text-color-dark);
       overflow: hidden;
-      transition: background 0.5s, color 0.5s;
+      transition: background-color 0.4s ease, color 0.4s ease;
+      position: relative;
+      height: 100vh;
     }
     body.light-theme {
-      background: var(--bg-color-light);
-      color: var(--text-color-light);
+      background-color: var(--bg-light);
+      color: var(--text-light);
     }
 
+    @keyframes bgColors {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
     .loader-container {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+      width: 360px;
+      padding: 30px;
+      border-radius: 20px;
+      background: linear-gradient(-45deg, #3a1c71, #d76d77, #ffaf7b, #1e3c72);
+      background-size: 400% 400%;
+      animation: bgColors 15s ease infinite;
+      box-shadow: 0 0 20px #fff7;
+      color: var(--accent-dark);
       text-align: center;
+      user-select: none;
+      z-index: 9999;
+      transition: background-color 0.4s ease, color 0.4s ease;
     }
+    body.light-theme .loader-container {
+      background: #ffffffdd;
+      color: var(--accent-light);
+      animation: none;
+      box-shadow: 0 0 15px #aaa;
+    }
+
     .logo {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      text-shadow: 2px 2px #00000099;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-shadow: 2px 2px 8px #000000aa;
+      color: var(--accent-dark);
+      transition: color 0.4s ease, text-shadow 0.4s ease;
     }
     body.light-theme .logo {
+      color: var(--accent-light);
       text-shadow: none;
     }
+
+    /* Noktaların animasyonu */
+    .dots {
+      display: inline-block;
+      width: 20px;
+      text-align: left;
+      font-weight: 900;
+      font-size: 2.5rem;
+      position: relative;
+      margin-left: 3px;
+      color: currentColor;
+    }
+    .dot {
+      display: inline-block;
+      animation-name: blink;
+      animation-duration: 1.5s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+      opacity: 0.3;
+      margin-right: 2px;
+    }
+    .dot:nth-child(1) { animation-delay: 0s; }
+    .dot:nth-child(2) { animation-delay: 0.3s; }
+    .dot:nth-child(3) { animation-delay: 0.6s; }
+    @keyframes blink {
+      0%, 80%, 100% { opacity: 0.3; }
+      40% { opacity: 1; }
+    }
+
     .info-text {
       font-size: 1.2rem;
       margin-bottom: 30px;
-      height: 24px;
+      height: 28px;
+      font-weight: 600;
+      text-shadow: 1px 1px 5px #00000099;
+      color: var(--accent-dark);
+      transition: color 0.4s ease, text-shadow 0.4s ease;
     }
+    body.light-theme .info-text {
+      color: var(--accent-light);
+      text-shadow: none;
+    }
+
+    /* Vurgu animasyonu */
+    .highlight {
+      color: var(--highlight-color);
+      font-weight: 900;
+      animation: pulseHighlight 1.5s ease-in-out infinite;
+      text-shadow: 0 0 8px #ffcc00aa;
+    }
+    @keyframes pulseHighlight {
+      0%, 100% { color: var(--highlight-color); text-shadow: 0 0 8px #ffcc00aa; }
+      50% { color: #fff; text-shadow: 0 0 15px #fff; }
+    }
+
     .progress-bar {
       width: 300px;
       height: 20px;
-      border: 2px solid var(--text-color-dark);
+      border: 2px solid var(--accent-dark);
       background-color: rgba(255, 255, 255, 0.1);
       margin: 0 auto;
       position: relative;
       border-radius: 10px;
       overflow: hidden;
-      transition: border-color 0.5s;
+      transition: border-color 0.4s ease;
     }
     body.light-theme .progress-bar {
-      border-color: var(--text-color-light);
+      border-color: var(--accent-light);
     }
     .progress {
-      background: linear-gradient(to right, var(--accent-color), #ffffff, #ffffff);
+      background: linear-gradient(90deg, #ffcc00, #fff7, #ffcc00);
       width: 0%;
       height: 100%;
       transition: width 0.2s;
+      box-shadow: 0 0 10px #ffcc00;
     }
     #skipButton {
       margin-top: 20px;
       padding: 8px 16px;
       font-size: 1rem;
-      background: var(--accent-color);
-      color: black; /* Buton yazısını siyah yaptım beyaz zemin için */
+      background: var(--highlight-color);
+      color: black;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 10px var(--accent-color);
+      box-shadow: 0 0 15px var(--highlight-color);
       transition: background 0.3s, box-shadow 0.3s;
+      user-select: none;
     }
     #skipButton:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 15px #e6e6e6;
+      background: #ffd633;
+      box-shadow: 0 0 25px #ffd633;
     }
+
     .main-content {
       display: none;
       padding: 40px 20px;
@@ -94,267 +177,190 @@
       overflow-y: auto;
       height: 100vh;
       box-sizing: border-box;
-      background: var(--box-bg-dark);
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 15px;
       transition: background 0.5s, color 0.5s;
+      color: var(--accent-dark);
     }
     body.light-theme .main-content {
-      background: var(--box-bg-light);
-      color: var(--text-color-light);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--accent-light);
     }
     .main-content h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px #00000077;
-      color: var(--accent-color);
+      color: var(--accent-dark);
     }
     body.light-theme .main-content h1 {
       text-shadow: none;
     }
+
     .discord-button, .play-button {
       display: inline-block;
-      background: var(--accent-color);
+      background: var(--highlight-color);
       padding: 12px 28px;
-      color: black; /* Beyaz arka plana siyah yazı */
+      color: black;
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 12px var(--accent-color);
+      box-shadow: 0 0 12px var(--highlight-color);
       margin: 10px 15px 30px 15px;
       transition: background 0.3s, box-shadow 0.3s;
+      user-select: none;
     }
     .discord-button:hover, .play-button:hover {
       background: #e6e6e6;
       box-shadow: 0 0 20px #e6e6e6;
     }
-    .info-sections {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      max-width: 1000px;
-      margin: 0 auto 50px auto;
-      text-align: left;
-    }
-    .info-box {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 25px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 15px var(--accent-color);
-      transition: background 0.3s, color 0.3s;
-      color: var(--accent-color);
-      font-weight: 700;
-    }
-    body.light-theme .info-box {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--accent-color);
-      box-shadow: 0 0 10px var(--accent-color);
-    }
-    .info-box:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-    .info-box h2 {
-      margin-top: 0;
-      margin-bottom: 12px;
-      color: var(--accent-color);
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-    body.light-theme .info-box h2 {
-      text-shadow: none;
-    }
-    .info-box p {
-      line-height: 1.5;
+
+    /* Kar tanesi animasyonu */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      color: white;
+      user-select: none;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      opacity: 0.8;
       font-size: 1rem;
+      z-index: 10000;
     }
-    @media (max-width: 960px) {
-      .info-sections {
-        flex-direction: column;
-        align-items: center;
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.8;
       }
-      .info-box {
-        width: 90%;
-        max-width: 400px;
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
       }
     }
 
-    /* Meslekler Bölümü */
-    .jobs-section {
-      max-width: 900px;
-      margin: 0 auto 20px auto;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      text-align: center;
-    }
-    .jobs-section h2 {
-      width: 100%;
-      text-align: center;
-      color: var(--accent-color);
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-    body.light-theme .jobs-section h2 {
-      text-shadow: none;
-    }
-    .job-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      width: 180px;
-      box-shadow: 0 0 15px var(--accent-color);
-      transition: background 0.3s;
-      cursor: default;
-      user-select: none;
-      color: var(--accent-color);
-      font-weight: 700;
-    }
-    body.light-theme .job-card {
-      background: rgba(0, 0, 0, 0.05);
-      color: var(--accent-color);
-    }
-    .job-card:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    /* Altta slogan bölümü */
-    .slogan-section {
-      max-width: 600px;
-      margin: 30px auto 0 auto;
-      font-size: 1.5rem;
-      color: var(--accent-color);
-      font-weight: 700;
-      text-align: center;
-      text-shadow: 1px 1px 2px #000000cc;
-      user-select: none;
-      line-height: 1.4;
-      transition: color 0.5s;
-    }
-    body.light-theme .slogan-section {
-      text-shadow: none;
-    }
-
-    /* Tema değiştir butonu */
+    /* Tema değiştirme butonu */
     #themeToggle {
       position: fixed;
       top: 15px;
       right: 15px;
-      background: var(--accent-color);
+      background: var(--highlight-color);
       border: none;
       color: black;
       padding: 10px 16px;
       border-radius: 8px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 0 10px var(--accent-color);
+      box-shadow: 0 0 10px var(--highlight-color);
       transition: background 0.3s, box-shadow 0.3s;
       z-index: 1000;
+      user-select: none;
     }
     #themeToggle:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 15px #e6e6e6;
+      background: #ffd633;
+      box-shadow: 0 0 15px #ffd633;
     }
   </style>
 </head>
 <body>
   <button id="themeToggle" title="Tema Değiştir">Siyah / Beyaz</button>
 
-  <div class="loader-container" id="loader">
-    <div class="logo">NİneBorn Roleplay...</div>
-    <div class="info-text" id="infoText">Yükleniyor...</div>
-    <div class="progress-bar">
+  <div class="loader-container" id="loader" role="alert" aria-live="assertive" aria-busy="true">
+    <div class="logo" aria-label="Sunucu adı">
+      NineBorn Roleplay<span class="dots" aria-hidden="true">
+        <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
+      </span>
+    </div>
+    <div class="info-text" id="infoText">
+      <span class="highlight">Yasal mısın, yoksa suçlu mu?</span>
+    </div>
+    <div class="progress-bar" aria-label="Yükleme durumu">
       <div class="progress" id="progressBar"></div>
     </div>
-    <button id="skipButton">Atla</button>
+    <button id="skipButton" aria-label="Yüklemeyi atla">Atla</button>
   </div>
 
-  <div class="main-content" id="mainContent">
+  <div class="main-content" id="mainContent" role="main" tabindex="-1" aria-hidden="true">
     <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
-    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
-    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
+    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button" rel="noopener noreferrer" aria-label="Discord'a katıl">Discord'a Katıl</a>
+    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button" rel="noopener noreferrer" aria-label="Oyuna katıl">Oyuna Katıl</a>
 
-    <div class="info-sections">
-      <div class="info-box">
-        <h2>Neden Kurduk?</h2>
-        <p>
-          NineBorn Roleplay, gerçekçi bir Almanya sokak RP deneyimi sunmak için kuruldu. Amacımız kaliteli ve eğlenceli roleplay ortamı yaratmak.
-        </p>
-      </div>
-      <div class="info-box">
-        <h2>Biz Kimiz?</h2>
-        <p>
-          Biz tutkulu RP oyuncularıyız. Oyuncuların eğlenmesi ve kendini geliştirmesi için sürekli destek veriyoruz.
-        </p>
-      </div>
-      <div class="info-box">
-        <h2>Vizyonumuz</h2>
-        <p>
-          En kaliteli ve en aktif Almanya RP sunucusu olmak, oyunculara unutulmaz anlar yaşatmak.
-        </p>
-      </div>
-    </div>
-
-    <section class="jobs-section" aria-label="Meslekler">
-      <h2>Meslekler</h2>
-      <div class="job-card">Polis</div>
-      <div class="job-card">İtfaiyeci</div>
-      <div class="job-card">Ambulans</div>
-      <div class="job-card">Suçlu</div>
-      <div class="job-card">Taksi Şoförü</div>
-      <div class="job-card">Tüccar</div>
-      <div class="job-card">Garson</div>
-      <div class="job-card">Mekancı</div>
-    </section>
-
-    <div class="slogan-section">
-      <p>Ne olursan ol!<br />Eğer bişey olamazsan bu şehir seni yutar!</p>
-    </div>
+    <!-- Diğer içerikler buraya -->
   </div>
 
   <script>
-    const infoTexts = [
-      "Almanya'nın en tehlikeli sokakları burada!",
-      "Polis, ambulans, itfaiye... Hepsi hazır!",
-      "Yasal mısın, yoksa suçlu mu?",
-      "Kurallarına göre oyna, RP'ye saygı duy!",
-      "Sunucumuza hoş geldin!",
-      "NineBorn Roleplay Sadece Roleplay İle Kalmaz, Gerçekci olmaya çalışır..."
-    ];
+    const progressBar = document.getElementById('progressBar');
+    const infoText = document.getElementById('infoText');
+    const loader = document.getElementById('loader');
+    const mainContent = document.getElementById('mainContent');
+    const skipButton = document.getElementById('skipButton');
+    const themeToggle = document.getElementById('themeToggle');
 
-    let currentText = 0;
     let progress = 0;
-    const progressBar = document.getElementById("progressBar");
-    const infoText = document.getElementById("infoText");
+    let loadingInterval;
 
-    const interval = setInterval(() => {
-      progress += 1;
-      progressBar.style.width = progress + "%";
+    function updateProgress() {
+      progress += Math.random() * 8 + 2; // 2 - 10 arası artışlar
+      if(progress > 100) progress = 100;
+      progressBar.style.width = progress + '%';
 
-      if (progress % 20 === 0 && currentText < infoTexts.length) {
-        infoText.textContent = infoTexts[currentText];
-        currentText++;
+      if(progress >= 100) {
+        clearInterval(loadingInterval);
+        showMainContent();
       }
+    }
 
-      if (progress >= 100) {
-        clearInterval(interval);
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
-      }
-    }, 50);
+    function showMainContent() {
+      loader.setAttribute('aria-hidden', 'true');
+      loader.style.display = 'none';
 
-    document.getElementById('skipButton').addEventListener('click', () => {
-      clearInterval(interval);
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
+      mainContent.style.display = 'block';
+      mainContent.setAttribute('aria-hidden', 'false');
+      mainContent.focus();
+    }
+
+    skipButton.addEventListener('click', () => {
+      clearInterval(loadingInterval);
+      progress = 100;
+      progressBar.style.width = '100%';
+      showMainContent();
     });
 
-    // Tema değiştirme
-    const themeToggleBtn = document.getElementById('themeToggle');
-    themeToggleBtn.addEventListener('click', () => {
-      document.body.classList.toggle('light-theme');
-    });
+    loadingInterval = setInterval(updateProgress, 400);
+
+    // Tema değiştirme fonksiyonu
+    function toggleTheme() {
+      if(document.body.classList.contains('light-theme')) {
+        document.body.classList.remove('light-theme');
+        themeToggle.textContent = 'Siyah / Beyaz';
+      } else {
+        document.body.classList.add('light-theme');
+        themeToggle.textContent = 'Koyu / Açık';
+      }
+    }
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Kar tanesi üretimi
+    function createSnowflake() {
+      const snowflake = document.createElement('div');
+      snowflake.classList.add('snowflake');
+      snowflake.textContent = '❄';
+      snowflake.style.left = Math.random() * 100 + 'vw';
+      snowflake.style.fontSize = (Math.random() * 16 + 10) + 'px';
+      snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
+      snowflake.style.opacity = Math.random();
+      document.body.appendChild(snowflake);
+
+      // 5-10 saniye sonra sil
+      setTimeout(() => {
+        snowflake.remove();
+      }, 10000);
+    }
+
+    // Sürekli kar üret
+    setInterval(createSnowflake, 200);
+
   </script>
 </body>
 </html>
