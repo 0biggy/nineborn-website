@@ -31,6 +31,24 @@
       color: var(--color-light-text);
     }
 
+    /* Uyarı Banner */
+    #updateBanner {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: #cc0000;
+      color: white;
+      font-weight: 700;
+      text-align: center;
+      padding: 12px 10px;
+      font-size: 1.1rem;
+      z-index: 2000;
+      user-select: none;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.4);
+    }
+
+    /* Loader ve diğer stiller */
     .loader-container {
       position: absolute;
       top: 50%;
@@ -310,18 +328,23 @@
 </head>
 <body>
 
+  <div id="updateBanner" role="alert" aria-live="assertive">
+    <div>🚨 Site güncelleniyor, lütfen bekleyin...</div>
+    <div>1 Dakika+ devam ediyorsa lütfen sayfayı yenileyin.</div>
+  </div>
+
   <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">🌙 Koyu / ☀️ Açık</button>
 
-  <div class="loader-container" id="loader">
+  <div class="loader-container" id="loader" aria-busy="true" aria-live="polite">
     <div class="logo">NİneBorn Roleplay...</div>
     <div class="info-text" id="infoText">Yükleniyor...</div>
-    <div class="progress-bar">
+    <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
       <div class="progress" id="progressBar"></div>
     </div>
     <button id="skipButton">Atla</button>
   </div>
 
-  <div class="main-content" id="mainContent" role="main">
+  <div class="main-content" id="mainContent" role="main" tabindex="-1">
     <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
     <a href="https://discord.gg/SMStN7JyDa" target="_blank" rel="noopener noreferrer" class="discord-button">Discord'a Katıl</a>
     <a href="https://www.roblox.com/games/1234567890" target="_blank" rel="noopener noreferrer" class="play-button">Oyuna Katıl</a>
@@ -368,7 +391,7 @@
     const infoTexts = [
       "Almanya'nın en tehlikeli sokakları burada!",
       "Polis, ambulans, itfaiye... Hepsi hazır!",
-      "Vur, Kaç! Asla yakalanma!",
+      "Yasal mısın, yoksa suçlu mu?",
       "Kurallarına göre oyna, RP'ye saygı duy!",
       "Sunucumuza hoş geldin!",
       "NineBorn Roleplay Sadece Roleplay İle Kalmaz, Gerçekci olmaya çalışır..."
@@ -378,10 +401,14 @@
     let progress = 0;
     const progressBar = document.getElementById("progressBar");
     const infoText = document.getElementById("infoText");
+    const loader = document.getElementById("loader");
+    const mainContent = document.getElementById("mainContent");
+    const updateBanner = document.getElementById("updateBanner");
 
     const interval = setInterval(() => {
       progress += 1;
       progressBar.style.width = progress + "%";
+      progressBar.setAttribute('aria-valuenow', progress);
 
       if (progress % 20 === 0 && currentText < infoTexts.length) {
         infoText.textContent = infoTexts[currentText];
@@ -390,31 +417,26 @@
 
       if (progress >= 100) {
         clearInterval(interval);
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("mainContent").style.display = "block";
+        loader.style.display = "none";
+        mainContent.style.display = "block";
+        updateBanner.style.display = "none";
+        mainContent.focus();
       }
     }, 50);
 
     document.getElementById('skipButton').addEventListener('click', () => {
       clearInterval(interval);
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('mainContent').style.display = 'block';
+      loader.style.display = "none";
+      mainContent.style.display = "block";
+      updateBanner.style.display = "none";
+      mainContent.focus();
     });
 
     // Tema değiştirme
-    const themeToggle = document.getElementById('themeToggle');
+    const themeToggle = document.getElementById("themeToggle");
     const body = document.body;
-
-    // Önce localStorage'dan tema oku, yoksa dark varsayılan
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    if (savedTheme === 'light') {
-      body.classList.add('light');
-    }
-
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light');
-      const newTheme = body.classList.contains('light') ? 'light' : 'dark';
-      localStorage.setItem('theme', newTheme);
+    themeToggle.addEventListener("click", () => {
+      body.classList.toggle("light");
     });
   </script>
 </body>
