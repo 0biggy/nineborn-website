@@ -6,14 +6,31 @@
   <title>NineBorn Roleplay V1.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --color-light-bg: #fff;
+      --color-light-text: #000;
+      --color-light-accent: #121212;
+
+      --color-dark-bg: #121212;
+      --color-dark-text: #fff;
+      --color-dark-accent: #d9d9d9;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      background: #121212;
       font-family: 'Orbitron', sans-serif;
-      color: black; /* Yazılar siyah */
+      background: var(--color-dark-bg);
+      color: var(--color-dark-text);
       overflow: hidden;
+      transition: background 0.3s, color 0.3s;
     }
+
+    body.light {
+      background: var(--color-light-bg);
+      color: var(--color-light-text);
+    }
+
     .loader-container {
       position: absolute;
       top: 50%;
@@ -21,50 +38,96 @@
       transform: translate(-50%, -50%);
       text-align: center;
     }
+
     .logo {
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-shadow: 2px 2px #00000099;
       color: inherit;
+      user-select: none;
     }
+
     .info-text {
       font-size: 1.2rem;
       margin-bottom: 30px;
       height: 24px;
       color: inherit;
     }
+
     .progress-bar {
       width: 300px;
       height: 20px;
       border: 2px solid currentColor;
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255 255 255 / 0.1);
       margin: 0 auto;
       position: relative;
       border-radius: 10px;
       overflow: hidden;
+      transition: border-color 0.3s;
     }
+
+    body.light .progress-bar {
+      background-color: rgba(0 0 0 / 0.1);
+    }
+
     .progress {
       background: linear-gradient(to right, #ffffff, #ffffff, #ffffff);
       width: 0%;
       height: 100%;
       transition: width 0.2s;
     }
+
     #skipButton {
       margin-top: 20px;
       padding: 8px 16px;
       font-size: 1rem;
-      background: #ffffff;
-      color: black;
+      background: currentColor;
+      color: var(--color-dark-bg);
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 10px #ffffff;
-      transition: background 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 10px currentColor;
+      transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+      user-select: none;
     }
+
+    body.light #skipButton {
+      background: currentColor;
+      color: var(--color-light-bg);
+    }
+
     #skipButton:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 15px #e6e6e6;
+      background: transparent;
+      box-shadow: 0 0 20px currentColor;
+      color: currentColor;
     }
+
+    .theme-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: transparent;
+      border: 2px solid currentColor;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      color: inherit;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.3s, color 0.3s, border-color 0.3s;
+      z-index: 1000;
+    }
+
+    .theme-toggle:hover {
+      background: currentColor;
+      color: var(--color-dark-bg);
+    }
+
+    body.light .theme-toggle:hover {
+      color: var(--color-light-text);
+      background: currentColor;
+    }
+
     .main-content {
       display: none;
       padding: 40px 20px;
@@ -76,30 +139,50 @@
       box-sizing: border-box;
       background: rgba(0, 0, 0, 0.7);
       border-radius: 15px;
-      color: black;
+      color: var(--color-dark-text);
+      transition: background 0.3s, color 0.3s;
     }
+
+    body.light .main-content {
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--color-light-text);
+    }
+
     .main-content h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px #00000077;
-      color: #ffffff;
+      color: inherit;
+      user-select: none;
     }
+
     .discord-button, .play-button {
       display: inline-block;
-      background: #ffffff;
+      background: currentColor;
       padding: 12px 28px;
-      color: black;
+      color: var(--color-dark-bg);
       border-radius: 6px;
       text-decoration: none;
       font-weight: bold;
-      box-shadow: 0 0 12px #ffffff;
+      box-shadow: 0 0 12px currentColor;
       margin: 10px 15px 30px 15px;
-      transition: background 0.3s, box-shadow 0.3s;
+      transition: background 0.3s, box-shadow 0.3s, color 0.3s;
+      user-select: none;
     }
+
+    body.light .discord-button,
+    body.light .play-button {
+      color: var(--color-light-bg);
+      background: currentColor;
+      box-shadow: 0 0 15px currentColor;
+    }
+
     .discord-button:hover, .play-button:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 20px #e6e6e6;
+      background: transparent;
+      color: currentColor;
+      box-shadow: 0 0 20px currentColor;
     }
+
     .info-sections {
       display: flex;
       justify-content: center;
@@ -108,32 +191,48 @@
       max-width: 1000px;
       margin: 0 auto 50px auto;
       text-align: left;
-      color: black;
+      color: inherit;
+      user-select: none;
     }
+
     .info-box {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255 255 255 / 0.1);
       padding: 20px 25px;
       border-radius: 10px;
       width: 300px;
-      box-shadow: 0 0 15px #ffffff;
-      color: #ffffff;
+      box-shadow: 0 0 15px currentColor;
       font-weight: 700;
       transition: background 0.3s, color 0.3s;
+      color: inherit;
     }
+
+    body.light .info-box {
+      background: rgba(0 0 0 / 0.05);
+      color: inherit;
+      box-shadow: 0 0 15px currentColor;
+    }
+
     .info-box:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255 255 255 / 0.2);
     }
+
+    body.light .info-box:hover {
+      background: rgba(0 0 0 / 0.15);
+    }
+
     .info-box h2 {
       margin-top: 0;
       margin-bottom: 12px;
-      color: #ffffff;
       text-shadow: 1px 1px 3px #000000aa;
+      color: inherit;
     }
+
     .info-box p {
       line-height: 1.5;
       font-size: 1rem;
-      color: #fff;
+      color: inherit;
     }
+
     @media (max-width: 960px) {
       .info-sections {
         flex-direction: column;
@@ -144,6 +243,7 @@
         max-width: 400px;
       }
     }
+
     .jobs-section {
       max-width: 900px;
       margin: 0 auto 20px auto;
@@ -152,45 +252,65 @@
       gap: 20px;
       justify-content: center;
       text-align: center;
-      color: black;
+      color: inherit;
+      user-select: none;
     }
+
     .jobs-section h2 {
       width: 100%;
       text-align: center;
-      color: #ffffff;
       font-size: 2.2rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 3px #000000aa;
+      color: inherit;
     }
+
     .job-card {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255 255 255 / 0.1);
       border-radius: 12px;
       padding: 20px;
       width: 180px;
-      box-shadow: 0 0 15px #ffffff;
+      box-shadow: 0 0 15px currentColor;
       cursor: default;
       user-select: none;
-      color: #ffffff;
       font-weight: 700;
       transition: background 0.3s;
+      color: inherit;
     }
+
     .job-card:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255 255 255 / 0.2);
     }
+
+    body.light .job-card {
+      background: rgba(0 0 0 / 0.05);
+      box-shadow: 0 0 15px currentColor;
+    }
+
+    body.light .job-card:hover {
+      background: rgba(0 0 0 / 0.15);
+    }
+
     .slogan-section {
       max-width: 600px;
       margin: 30px auto 0 auto;
       font-size: 1.5rem;
-      color: #ffffff;
       font-weight: 700;
       text-align: center;
-      text-shadow: 1px 1px 2px #000000cc;
       user-select: none;
       line-height: 1.4;
+      color: inherit;
+      text-shadow: 1px 1px 2px #000000cc;
+    }
+
+    body.light .slogan-section {
+      text-shadow: none;
     }
   </style>
 </head>
 <body>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Tema değiştir">🌙 Koyu / ☀️ Açık</button>
 
   <div class="loader-container" id="loader">
     <div class="logo">NİneBorn Roleplay...</div>
@@ -201,10 +321,10 @@
     <button id="skipButton">Atla</button>
   </div>
 
-  <div class="main-content" id="mainContent">
+  <div class="main-content" id="mainContent" role="main">
     <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
-    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
-    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
+    <a href="https://discord.gg/SMStN7JyDa" target="_blank" rel="noopener noreferrer" class="discord-button">Discord'a Katıl</a>
+    <a href="https://www.roblox.com/games/1234567890" target="_blank" rel="noopener noreferrer" class="play-button">Oyuna Katıl</a>
 
     <div class="info-sections">
       <div class="info-box">
@@ -279,6 +399,22 @@
       clearInterval(interval);
       document.getElementById('loader').style.display = 'none';
       document.getElementById('mainContent').style.display = 'block';
+    });
+
+    // Tema değiştirme
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    // Önce localStorage'dan tema oku, yoksa dark varsayılan
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    if (savedTheme === 'light') {
+      body.classList.add('light');
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light');
+      const newTheme = body.classList.contains('light') ? 'light' : 'dark';
+      localStorage.setItem('theme', newTheme);
     });
   </script>
 </body>
