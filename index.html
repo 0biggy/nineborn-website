@@ -1,280 +1,360 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>NineBorn Roleplay V1.5</title>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
-<style>
-  /* Genel stil ve arka plan */
-  body {
-    margin: 0; padding: 0;
-    background-color: #000;
-    color: #fff;
-    font-family: 'Orbitron', sans-serif;
-    height: 100vh;
-    overflow: hidden;
-    user-select: none;
-    position: relative;
-  }
-
-  /* Yükleyici kutusu */
-  .loader-container {
-    position: absolute;
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    width: 360px;
-    padding: 30px;
-    border-radius: 20px;
-    background: linear-gradient(-45deg, #111, #222, #333, #111);
-    background-size: 400% 400%;
-    animation: bgColors 15s ease infinite;
-    box-shadow: 0 0 30px #fff7;
-    text-align: center;
-    z-index: 9999;
-  }
-
-  @keyframes bgColors {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
-  }
-
-  /* Logo ve animasyonlu noktalar */
-  .logo {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-    font-weight: 900;
-    letter-spacing: 0.1em;
-    color: #fff;
-    text-shadow: 2px 2px 8px #000000aa;
-  }
-  .dots {
-    display: inline-block;
-    width: 20px;
-    text-align: left;
-    font-weight: 900;
-    font-size: 2.5rem;
-    position: relative;
-    margin-left: 5px;
-    color: #fff;
-  }
-  .dot {
-    display: inline-block;
-    animation-name: blink;
-    animation-duration: 1.5s;
-    animation-iteration-count: infinite;
-    animation-timing-function: ease-in-out;
-    opacity: 0.3;
-    margin-right: 2px;
-  }
-  .dot:nth-child(1) { animation-delay: 0s; }
-  .dot:nth-child(2) { animation-delay: 0.3s; }
-  .dot:nth-child(3) { animation-delay: 0.6s; }
-
-  @keyframes blink {
-    0%, 80%, 100% { opacity: 0.3; }
-    40% { opacity: 1; }
-  }
-
-  /* Yükleme metni */
-  .info-text {
-    font-size: 1.3rem;
-    margin-bottom: 30px;
-    font-weight: 700;
-    color: #fff;
-    text-shadow: 1px 1px 8px #000000cc;
-  }
-
-  /* Vurgu yazısı animasyonu */
-  .highlight {
-    color: #ffcc00;
-    font-weight: 900;
-    animation: pulseHighlight 1.5s ease-in-out infinite;
-    text-shadow: 0 0 8px #ffcc00aa;
-    cursor: default;
-  }
-  @keyframes pulseHighlight {
-    0%, 100% { color: #ffcc00; text-shadow: 0 0 8px #ffcc00aa; }
-    50% { color: #fff; text-shadow: 0 0 15px #fff; }
-  }
-
-  /* Yükleme bar */
-  .progress-bar {
-    width: 300px;
-    height: 20px;
-    border: 2px solid #fff;
-    background-color: rgba(255, 255, 255, 0.1);
-    margin: 0 auto;
-    position: relative;
-    border-radius: 10px;
-    overflow: hidden;
-  }
-  .progress {
-    background: linear-gradient(90deg, #ffcc00, #fff7, #ffcc00);
-    width: 0%;
-    height: 100%;
-    transition: width 0.2s;
-    box-shadow: 0 0 10px #ffcc00;
-  }
-
-  /* Atla butonu */
-  #skipButton {
-    margin-top: 20px;
-    padding: 8px 16px;
-    font-size: 1rem;
-    background: #ffcc00;
-    color: black;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    box-shadow: 0 0 15px #ffcc00;
-    user-select: none;
-    transition: background 0.3s, box-shadow 0.3s;
-  }
-  #skipButton:hover {
-    background: #ffd633;
-    box-shadow: 0 0 25px #ffd633;
-  }
-
-  /* Ana içerik (yükleme sonrası) */
-  .main-content {
-    display: none;
-    padding: 40px 20px;
-    text-align: center;
-    max-width: 1100px;
-    margin: 0 auto;
-    overflow-y: auto;
-    height: 100vh;
-    box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 15px;
-    color: #fff;
-  }
-  .main-content h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 5px #00000077;
-  }
-  .discord-button, .play-button {
-    display: inline-block;
-    background: #ffcc00;
-    padding: 12px 28px;
-    color: black;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: bold;
-    box-shadow: 0 0 12px #ffcc00;
-    margin: 10px 15px 30px 15px;
-    transition: background 0.3s, box-shadow 0.3s;
-    user-select: none;
-  }
-  .discord-button:hover, .play-button:hover {
-    background: #e6e6e6;
-    box-shadow: 0 0 20px #e6e6e6;
-  }
-
-  /* Kar tanesi animasyonu */
-  .snowflake {
-    position: fixed;
-    top: -10px;
-    color: white;
-    user-select: none;
-    pointer-events: none;
-    animation-name: fall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    opacity: 0.8;
-    font-size: 1rem;
-    z-index: 10000;
-  }
-  @keyframes fall {
-    0% {
-      transform: translateY(0) rotate(0deg);
-      opacity: 0.8;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>NineBorn Roleplay V1.5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-color-light: #f5f5f5;
+      --bg-color-dark: #121212;
+      --box-bg-light: rgba(255, 255, 255, 0.9);
+      --box-bg-dark: rgba(0, 0, 0, 0.7);
+      --accent-color: #ffffff; /* Beyaz renk */
     }
-    100% {
-      transform: translateY(100vh) rotate(360deg);
-      opacity: 0;
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-color-dark);
+      font-family: 'Orbitron', sans-serif;
+      color: black; /* Default siyah tema için yazılar siyah */
+      overflow: hidden;
+      transition: background 0.5s, color 0.5s;
     }
-  }
-</style>
+    body.light-theme {
+      background: var(--bg-color-light);
+      color: white; /* Açık tema için yazılar beyaz */
+    }
+
+    .loader-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .logo {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #00000099;
+      color: inherit; /* Renk temaya uyumlu olsun */
+    }
+    body.light-theme .logo {
+      text-shadow: none;
+    }
+    .info-text {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      height: 24px;
+      color: inherit;
+    }
+    .progress-bar {
+      width: 300px;
+      height: 20px;
+      border: 2px solid currentColor; /* Yazı rengiyle uyumlu */
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 0 auto;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: border-color 0.5s;
+    }
+    .progress {
+      background: linear-gradient(to right, var(--accent-color), #ffffff, #ffffff);
+      width: 0%;
+      height: 100%;
+      transition: width 0.2s;
+    }
+    #skipButton {
+      margin-top: 20px;
+      padding: 8px 16px;
+      font-size: 1rem;
+      background: var(--accent-color);
+      color: black; /* Buton yazısı siyah */
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-color);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    #skipButton:hover {
+      background: #e6e6e6;
+      box-shadow: 0 0 15px #e6e6e6;
+    }
+    .main-content {
+      display: none;
+      padding: 40px 20px;
+      text-align: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      overflow-y: auto;
+      height: 100vh;
+      box-sizing: border-box;
+      background: var(--box-bg-dark);
+      border-radius: 15px;
+      transition: background 0.5s, color 0.5s;
+      color: inherit;
+    }
+    body.light-theme .main-content {
+      background: var(--box-bg-light);
+      color: inherit;
+    }
+    .main-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 5px #00000077;
+      color: var(--accent-color);
+    }
+    body.light-theme .main-content h1 {
+      text-shadow: none;
+    }
+    .discord-button, .play-button {
+      display: inline-block;
+      background: var(--accent-color);
+      padding: 12px 28px;
+      color: black;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 12px var(--accent-color);
+      margin: 10px 15px 30px 15px;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    .discord-button:hover, .play-button:hover {
+      background: #e6e6e6;
+      box-shadow: 0 0 20px #e6e6e6;
+    }
+    .info-sections {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      max-width: 1000px;
+      margin: 0 auto 50px auto;
+      text-align: left;
+      color: inherit;
+    }
+    .info-box {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px 25px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 0 15px var(--accent-color);
+      transition: background 0.3s, color 0.3s;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+    body.light-theme .info-box {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--accent-color);
+      box-shadow: 0 0 10px var(--accent-color);
+    }
+    .info-box:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    .info-box h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      color: var(--accent-color);
+      text-shadow: 1px 1px 3px #000000aa;
+    }
+    body.light-theme .info-box h2 {
+      text-shadow: none;
+    }
+    .info-box p {
+      line-height: 1.5;
+      font-size: 1rem;
+    }
+    @media (max-width: 960px) {
+      .info-sections {
+        flex-direction: column;
+        align-items: center;
+      }
+      .info-box {
+        width: 90%;
+        max-width: 400px;
+      }
+    }
+
+    /* Meslekler Bölümü */
+    .jobs-section {
+      max-width: 900px;
+      margin: 0 auto 20px auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      text-align: center;
+      color: inherit;
+    }
+    .jobs-section h2 {
+      width: 100%;
+      text-align: center;
+      color: var(--accent-color);
+      font-size: 2.2rem;
+      margin-bottom: 20px;
+      text-shadow: 1px 1px 3px #000000aa;
+    }
+    body.light-theme .jobs-section h2 {
+      text-shadow: none;
+    }
+    .job-card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      padding: 20px;
+      width: 180px;
+      box-shadow: 0 0 15px var(--accent-color);
+      transition: background 0.3s;
+      cursor: default;
+      user-select: none;
+      color: var(--accent-color);
+      font-weight: 700;
+    }
+    body.light-theme .job-card {
+      background: rgba(0, 0, 0, 0.05);
+      color: var(--accent-color);
+    }
+    .job-card:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Altta slogan bölümü */
+    .slogan-section {
+      max-width: 600px;
+      margin: 30px auto 0 auto;
+      font-size: 1.5rem;
+      color: var(--accent-color);
+      font-weight: 700;
+      text-align: center;
+      text-shadow: 1px 1px 2px #000000cc;
+      user-select: none;
+      line-height: 1.4;
+      transition: color 0.5s;
+    }
+    body.light-theme .slogan-section {
+      text-shadow: none;
+    }
+
+    /* Tema değiştir butonu */
+    #themeToggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: var(--accent-color);
+      border: none;
+      color: black;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--accent-color);
+      transition: background 0.3s, box-shadow 0.3s;
+      z-index: 1000;
+    }
+    #themeToggle:hover {
+      background: #e6e6e6;
+      box-shadow: 0 0 15px #e6e6e6;
+    }
+  </style>
 </head>
 <body>
+  <button id="themeToggle" title="Tema Değiştir">Siyah / Beyaz</button>
 
-<!-- Yükleme ekranı -->
-<div class="loader-container" id="loader" role="alert" aria-live="assertive" aria-busy="true">
-  <div class="logo" aria-label="Sunucu adı">
-    NineBorn Roleplay<span class="dots" aria-hidden="true">
-      <span class="dot">.</span><span class="dot">.</span><span class="dot">.</span>
-    </span>
+  <div class="loader-container" id="loader">
+    <div class="logo">NİneBorn Roleplay...</div>
+    <div class="info-text" id="infoText">Yükleniyor...</div>
+    <div class="progress-bar">
+      <div class="progress" id="progressBar"></div>
+    </div>
+    <button id="skipButton">Atla</button>
   </div>
-  <div class="info-text" id="infoText">
-    <span class="highlight">Vur, kaç</span>
+
+  <div class="main-content" id="mainContent">
+    <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
+    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
+    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
+
+    <div class="info-sections">
+      <div class="info-box">
+        <h2>Neden Kurduk?</h2>
+        <p>
+          NineBorn Roleplay, gerçekçi bir Almanya sokak RP deneyimi sunmak için kuruldu. Amacımız kaliteli ve eğlenceli roleplay ortamı yaratmak.
+        </p>
+      </div>
+      <div class="info-box">
+        <h2>Biz Kimiz?</h2>
+        <p>
+          Biz tutkulu RP oyuncularıyız. Oyuncuların eğlenmesi ve kendini geliştirmesi için sürekli destek veriyoruz.
+        </p>
+      </div>
+      <div class="info-box">
+        <h2>Vizyonumuz</h2>
+        <p>
+          En kaliteli ve en aktif Almanya RP sunucusu olmak, oyunculara unutulmaz anlar yaşatmak.
+        </p>
+      </div>
+    </div>
+
+    <section class="jobs-section" aria-label="Meslekler">
+      <h2>Meslekler</h2>
+      <div class="job-card">Polis</div>
+      <div class="job-card">İtfaiyeci</div>
+      <div class="job-card">Ambulans</div>
+      <div class="job-card">Suçlu</div>
+      <div class="job-card">Taksi Şoförü</div>
+      <div class="job-card">Tüccar</div>
+      <div class="job-card">Garson</div>
+      <div class="job-card">Mekancı</div>
+    </section>
+
+    <div class="slogan-section">
+      <p>Ne olursan ol!<br />Eğer bişey olamazsan bu şehir seni yutar!</p>
+    </div>
   </div>
-  <div class="progress-bar" aria-label="Yükleme durumu">
-    <div class="progress" id="progressBar"></div>
-  </div>
-  <button id="skipButton" aria-label="Yüklemeyi atla">Atla</button>
-</div>
 
-<!-- Ana içerik -->
-<div class="main-content" id="mainContent" role="main" tabindex="-1" aria-hidden="true">
-  <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
-  <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button" rel="noopener noreferrer" aria-label="Discord'a katıl">Discord'a Katıl</a>
-  <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button" rel="noopener noreferrer" aria-label="Oyuna katıl">Oyuna Katıl</a>
-</div>
+  <script>
+    const infoTexts = [
+      "Almanya'nın en tehlikeli sokakları burada!",
+      "Polis, ambulans, itfaiye... Hepsi hazır!",
+      "Yasal mısın, yoksa suçlu mu?",
+      "Kurallarına göre oyna, RP'ye saygı duy!",
+      "Sunucumuza hoş geldin!",
+      "NineBorn Roleplay Sadece Roleplay İle Kalmaz, Gerçekci olmaya çalışır..."
+    ];
 
-<script>
-  const progressBar = document.getElementById('progressBar');
-  const loader = document.getElementById('loader');
-  const mainContent = document.getElementById('mainContent');
-  const skipButton = document.getElementById('skipButton');
+    let currentText = 0;
+    let progress = 0;
+    const progressBar = document.getElementById("progressBar");
+    const infoText = document.getElementById("infoText");
 
-  let progress = 0;
-  let loadingInterval;
+    const interval = setInterval(() => {
+      progress += 1;
+      progressBar.style.width = progress + "%";
 
-  function updateProgress() {
-    progress += Math.random() * 8 + 2; // 2-10 arası artış
-    if (progress > 100) progress = 100;
-    progressBar.style.width = progress + '%';
+      if (progress % 20 === 0 && currentText < infoTexts.length) {
+        infoText.textContent = infoTexts[currentText];
+        currentText++;
+      }
 
-    if (progress >= 100) {
-      clearInterval(loadingInterval);
-      showMainContent();
-    }
-  }
+      if (progress >= 100) {
+        clearInterval(interval);
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+      }
+    }, 50);
 
-  function showMainContent() {
-    loader.style.display = 'none';
-    mainContent.style.display = 'block';
-    mainContent.focus();
-  }
+    document.getElementById('skipButton').addEventListener('click', () => {
+      clearInterval(interval);
+      document.getElementById('loader').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+    });
 
-  skipButton.addEventListener('click', () => {
-    clearInterval(loadingInterval);
-    progress = 100;
-    progressBar.style.width = '100%';
-    showMainContent();
-  });
-
-  loadingInterval = setInterval(updateProgress, 400);
-
-  // Kar tanesi üretimi
-  function createSnowflake() {
-    const snowflake = document.createElement('div');
-    snowflake.classList.add('snowflake');
-    snowflake.textContent = '❄';
-    snowflake.style.left = Math.random() * 100 + 'vw';
-    snowflake.style.fontSize = (Math.random() * 16 + 10) + 'px';
-    snowflake.style.animationDuration = (Math.random() * 5 + 5) + 's';
-    snowflake.style.opacity = Math.random();
-    document.body.appendChild(snowflake);
-
-    setTimeout(() => snowflake.remove(), 10000);
-  }
-  setInterval(createSnowflake, 200);
-</script>
-
+    // Tema değiştirme
+    const themeToggleBtn = document.getElementById('themeToggle');
+    themeToggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+    });
+  </script>
 </body>
 </html>
