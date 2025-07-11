@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NineBorn Roleplay V1.5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url('https://media.tenor.com/YvP3vR4CVE8AAAAC/fire-burning.gif') no-repeat center center fixed;
+      background-size: cover;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .loader-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .logo {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #000;
+    }
+
+    .info-text {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+      height: 24px;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 20px;
+      border: 2px solid white;
+      background-color: rgba(255, 255, 255, 0.1);
+      margin: 0 auto;
+      position: relative;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress {
+      background: linear-gradient(to right, red, orange, yellow);
+      width: 0%;
+      height: 100%;
+      transition: width 0.2s;
+    }
+
+    .main-content {
+      display: none;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .main-content h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .main-content a {
+      display: inline-block;
+      background: red;
+      padding: 10px 20px;
+      color: white;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 0 10px red;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader-container" id="loader">
+    <div class="logo">NİneBorn Roleplay...</div>
+    <div class="info-text" id="infoText">Yükleniyor...</div>
+    <div class="progress-bar">
+      <div class="progress" id="progressBar"></div>
+    </div>
+  </div>
+
+  <div class="main-content" id="mainContent">
+    <h1>NineBorn RolePlay Resmi Sitesine Hoş Geldin!</h1>
+    <a href="https://discord.gg/SMStN7JyDa" target="_blank">Discord'a Katıl</a>
+  </div>
+
+  <script>
+    const infoTexts = [
+      "Almanya'nın en tehlikeli sokakları burada!",
+      "Polis, ambulans, itfaiye... Hepsi hazır!",
+      "Yasal mısın, yoksa suçlu mu?",
+      "Kurallarına göre oyna, RP'ye saygı duy!",
+      "Sunucumuza hoş geldin!",
+      "NineBorn Roleplay Sadece Roleplay İle Kalmaz, Gerçekci olmaya çalışır..."
+    ];
+
+    let currentText = 0;
+    let progress = 0;
+    const progressBar = document.getElementById("progressBar");
+    const infoText = document.getElementById("infoText");
+
+    const interval = setInterval(() => {
+      progress += 1;
+      progressBar.style.width = progress + "%";
+
+      if (progress % 20 === 0 && currentText < infoTexts.length) {
+        infoText.textContent = infoTexts[currentText];
+        currentText++;
+      }
+
+      if (progress >= 100) {
+        clearInterval(interval);
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+      }
+    }, 50);
+  </script>
+</body>
+</html>
