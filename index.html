@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>NineBorn Roleplay V1.5</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
   <style>
@@ -15,7 +15,6 @@
       color: white;
       overflow: hidden;
     }
-
     .loader-container {
       position: absolute;
       top: 50%;
@@ -23,19 +22,16 @@
       transform: translate(-50%, -50%);
       text-align: center;
     }
-
     .logo {
       font-size: 2.5rem;
       margin-bottom: 20px;
       text-shadow: 2px 2px #000;
     }
-
     .info-text {
       font-size: 1.2rem;
       margin-bottom: 30px;
       height: 24px;
     }
-
     .progress-bar {
       width: 300px;
       height: 20px;
@@ -46,14 +42,12 @@
       border-radius: 10px;
       overflow: hidden;
     }
-
     .progress {
       background: linear-gradient(to right, red, orange, yellow);
       width: 0%;
       height: 100%;
       transition: width 0.2s;
     }
-
     #skipButton {
       margin-top: 20px;
       padding: 8px 16px;
@@ -66,12 +60,10 @@
       box-shadow: 0 0 10px red;
       transition: background 0.3s, box-shadow 0.3s;
     }
-
     #skipButton:hover {
       background: rgba(255,0,0,1);
       box-shadow: 0 0 15px red;
     }
-
     .main-content {
       display: none;
       padding: 40px 20px;
@@ -84,13 +76,11 @@
       background: rgba(0,0,0,0.5);
       border-radius: 15px;
     }
-
     .main-content h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px black;
     }
-
     .discord-button, .play-button {
       display: inline-block;
       background: red;
@@ -103,12 +93,10 @@
       margin: 10px 15px 30px 15px;
       transition: background 0.3s, box-shadow 0.3s;
     }
-
     .discord-button:hover, .play-button:hover {
       background: #cc0000;
       box-shadow: 0 0 20px #cc0000;
     }
-
     .info-sections {
       display: flex;
       justify-content: center;
@@ -118,7 +106,6 @@
       margin: 0 auto;
       text-align: left;
     }
-
     .info-box {
       background: rgba(255, 255, 255, 0.1);
       padding: 20px 25px;
@@ -127,24 +114,19 @@
       box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
       transition: background 0.3s;
     }
-
     .info-box:hover {
       background: rgba(255, 255, 255, 0.2);
     }
-
     .info-box h2 {
       margin-top: 0;
       margin-bottom: 12px;
       color: #ff6666;
       text-shadow: 1px 1px 3px black;
     }
-
     .info-box p {
       line-height: 1.5;
       font-size: 1rem;
     }
-
-    /* Responsive */
     @media (max-width: 960px) {
       .info-sections {
         flex-direction: column;
