@@ -13,24 +13,20 @@
       --accent-color: #ffffff;
     }
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
     body {
       background: var(--bg-color);
       font-family: 'Orbitron', sans-serif;
       color: var(--text-color);
       overflow: hidden;
-      padding-top: 40px; /* Haber banner için boşluk */
+      padding-top: 40px; /* Banner için */
     }
 
-    /* Haberler Banner */
+    /* Haber Banner */
     .news-banner {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
+      top: 0; left: 0; width: 100%;
       background: #222;
       color: #fff;
       font-family: 'Orbitron', sans-serif;
@@ -46,18 +42,14 @@
       animation: scrollNews 20s linear infinite;
     }
     @keyframes scrollNews {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
     }
 
+    /* Loader */
     .loader-container {
       position: absolute;
-      top: 50%;
-      left: 50%;
+      top: 50%; left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
       z-index: 1000;
@@ -78,13 +70,13 @@
       width: 300px;
       height: 20px;
       border: 2px solid var(--text-color);
-      background-color: rgba(255, 255, 255, 0.1);
+      background-color: rgba(255,255,255,0.1);
       margin: 0 auto;
       border-radius: 10px;
       overflow: hidden;
     }
     .progress {
-      background: linear-gradient(to right, var(--accent-color), #ffffff);
+      background: linear-gradient(to right, var(--accent-color), #fff);
       width: 0%;
       height: 100%;
       transition: width 0.2s;
@@ -106,6 +98,7 @@
       box-shadow: 0 0 15px #e6e6e6;
     }
 
+    /* Ana içerik */
     .main-content {
       display: none;
       padding: 40px 20px;
@@ -117,57 +110,41 @@
       border-radius: 15px;
       color: var(--accent-color);
       text-align: center;
-      z-index: 1;
       position: relative;
+      z-index: 1;
     }
-
     .main-content h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px #00000077;
       animation: glitch 2s infinite;
     }
-
-    /* Glitch animasyon efektleri */
     @keyframes glitch {
       0% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
+        text-shadow: 2px 0 red, -2px 0 cyan;
         transform: translate(0);
       }
       20% {
-        text-shadow:
-          -2px 0 red,
-          2px 0 cyan;
+        text-shadow: -2px 0 red, 2px 0 cyan;
         transform: translate(-2px, 2px);
       }
       40% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
+        text-shadow: 2px 0 red, -2px 0 cyan;
         transform: translate(2px, -2px);
       }
       60% {
-        text-shadow:
-          -2px 0 red,
-          2px 0 cyan;
+        text-shadow: -2px 0 red, 2px 0 cyan;
         transform: translate(-2px, 2px);
       }
       80% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
+        text-shadow: 2px 0 red, -2px 0 cyan;
         transform: translate(2px, -2px);
       }
       100% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
+        text-shadow: 2px 0 red, -2px 0 cyan;
         transform: translate(0);
       }
     }
-
     .discord-button, .play-button {
       display: inline-block;
       background: var(--accent-color);
@@ -180,12 +157,10 @@
       margin: 10px 15px 30px 15px;
       transition: 0.3s;
     }
-
     .discord-button:hover, .play-button:hover {
       background: #e6e6e6;
       box-shadow: 0 0 20px #e6e6e6;
     }
-
     .info-sections {
       display: flex;
       justify-content: center;
@@ -193,9 +168,8 @@
       flex-wrap: wrap;
       margin-bottom: 50px;
     }
-
     .info-box {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255,255,255,0.1);
       padding: 20px 25px;
       border-radius: 10px;
       width: 300px;
@@ -204,21 +178,17 @@
       font-weight: 700;
       transition: background 0.3s;
     }
-
     .info-box:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
     }
-
     .info-box h2 {
       margin-bottom: 12px;
       text-shadow: 1px 1px 3px #000000aa;
     }
-
     .info-box p {
       line-height: 1.5;
       font-size: 1rem;
     }
-
     @media (max-width: 960px) {
       .info-sections {
         flex-direction: column;
@@ -229,7 +199,6 @@
         max-width: 400px;
       }
     }
-
     .jobs-section {
       display: flex;
       flex-wrap: wrap;
@@ -237,16 +206,14 @@
       justify-content: center;
       margin-bottom: 20px;
     }
-
     .jobs-section h2 {
       width: 100%;
       font-size: 2.2rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 3px #000000aa;
     }
-
     .job-card {
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(255,255,255,0.1);
       border-radius: 12px;
       padding: 20px;
       width: 180px;
@@ -255,11 +222,9 @@
       font-weight: 700;
       transition: background 0.3s;
     }
-
     .job-card:hover {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
     }
-
     .slogan-section {
       max-width: 600px;
       margin: 30px auto 0;
@@ -269,10 +234,10 @@
       line-height: 1.4;
     }
 
-    /* Modal overlay and content */
+    /* Modal */
     #rulesModal {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
+      top:0; left:0; right:0; bottom:0;
       background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: center;
@@ -288,11 +253,9 @@
       border-radius: 10px;
       user-select: none;
     }
-
     #rulesModal.hidden {
       display: none;
     }
-
     #rulesModal .content-box {
       background: var(--box-bg);
       padding: 30px 25px;
@@ -303,14 +266,12 @@
       text-align: left;
       user-select: text;
     }
-
     #rulesModal h2 {
       margin-bottom: 20px;
       font-size: 2rem;
       text-shadow: 1px 1px 4px #000000bb;
       text-align: center;
     }
-
     #rulesModal p {
       margin-bottom: 30px;
       font-weight: 400;
@@ -325,7 +286,6 @@
       background: rgba(255,255,255,0.1);
       white-space: pre-line;
     }
-
     #acceptRulesBtn {
       background: var(--accent-color);
       color: black;
@@ -340,7 +300,6 @@
       display: block;
       margin: 0 auto;
     }
-
     #acceptRulesBtn:hover {
       background: #e6e6e6;
       box-shadow: 0 0 20px #e6e6e6;
@@ -349,7 +308,6 @@
 </head>
 <body>
 
-  <!-- Haberler Banner -->
   <div class="news-banner" aria-label="Haberler ve Duyurular">
     <div class="news-content" id="newsContent" aria-live="polite" aria-atomic="true">
       <span>🔔 Yeni güncelleme yayında! &nbsp;&nbsp;&nbsp;</span>
@@ -419,7 +377,7 @@
         5. Hile ve kötü davranışlara izin verilmez.
 
         Ayrıca Discord kuralları ve gerçek hayat kurallarına uygun davranmanız beklenmektedir.
-        <br><br>
+
         Kuralları kabul etmeden siteye erişim sağlanamaz.
       </p>
       <button id="acceptRulesBtn" aria-label="Kuralları kabul et">Kabul Ediyorum</button>
@@ -459,6 +417,14 @@
     function hideRulesModal() {
       rulesModal.classList.add('hidden');
       loader.style.display = 'block';
+      mainContent.style.display = 'none';
+    }
+
+    function showMainContent() {
+      rulesModal.classList.add('hidden');
+      loader.style.display = 'none';
+      mainContent.style.display = 'block';
+      mainContent.focus();
     }
 
     acceptRulesBtn.addEventListener('click', () => {
@@ -469,10 +435,6 @@
 
     // Yükleme animasyonu fonksiyonu
     function startLoading() {
-      if (!checkRulesAccepted()) {
-        showRulesModal();
-        return;
-      }
       loader.style.display = 'block';
       mainContent.style.display = 'none';
 
@@ -483,9 +445,7 @@
           progressBar.style.width = '100%';
           infoText.textContent = 'Yükleme tamamlandı!';
           setTimeout(() => {
-            loader.style.display = 'none';
-            mainContent.style.display = 'block';
-            mainContent.focus();
+            showMainContent();
           }, 700);
           return;
         }
@@ -515,9 +475,7 @@
       progressBar.style.width = '100%';
       infoText.textContent = 'Yükleme atlandı!';
       setTimeout(() => {
-        loader.style.display = 'none';
-        mainContent.style.display = 'block';
-        mainContent.focus();
+        showMainContent();
       }, 300);
     });
 
