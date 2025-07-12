@@ -60,6 +60,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
+      z-index: 1000;
     }
     .logo {
       font-size: 2.5rem;
@@ -116,6 +117,8 @@
       border-radius: 15px;
       color: var(--accent-color);
       text-align: center;
+      z-index: 1;
+      position: relative;
     }
 
     .main-content h1 {
@@ -274,7 +277,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      z-index: 9999;
+      z-index: 99999;
       color: var(--accent-color);
       padding: 20px;
       text-align: center;
@@ -283,6 +286,7 @@
       line-height: 1.5;
       flex-direction: column;
       border-radius: 10px;
+      user-select: none;
     }
 
     #rulesModal.hidden {
@@ -296,44 +300,30 @@
       max-width: 600px;
       width: 100%;
       box-shadow: 0 0 20px var(--accent-color);
+      text-align: left;
+      user-select: text;
     }
 
     #rulesModal h2 {
       margin-bottom: 20px;
       font-size: 2rem;
       text-shadow: 1px 1px 4px #000000bb;
+      text-align: center;
     }
 
     #rulesModal p {
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       font-weight: 400;
       font-size: 1rem;
       color: #ddd;
-      max-height: 180px;
+      max-height: 250px;
       overflow-y: auto;
-      text-align: left;
       line-height: 1.4;
       border: 1px solid #ccc2;
       padding: 15px;
       border-radius: 8px;
       background: rgba(255,255,255,0.1);
-    }
-
-    #rulesModal p.extra-info {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #bbb;
-      max-height: none;
-      border: none;
-      background: transparent;
-      text-align: center;
-      line-height: 1.3;
-    }
-
-    #rulesModal p.extra-info a {
-      color: #fff;
-      text-decoration: underline;
-      cursor: pointer;
+      white-space: pre-line;
     }
 
     #acceptRulesBtn {
@@ -347,7 +337,8 @@
       box-shadow: 0 0 12px var(--accent-color);
       transition: background 0.3s, box-shadow 0.3s;
       font-size: 1.1rem;
-      margin-top: 10px;
+      display: block;
+      margin: 0 auto;
     }
 
     #acceptRulesBtn:hover {
@@ -360,7 +351,7 @@
 
   <!-- Haberler Banner -->
   <div class="news-banner" aria-label="Haberler ve Duyurular">
-    <div class="news-content" id="newsContent">
+    <div class="news-content" id="newsContent" aria-live="polite" aria-atomic="true">
       <span>🔔 Yeni güncelleme yayında! &nbsp;&nbsp;&nbsp;</span>
       <span>🎉 Haftasonu etkinliği başlıyor! &nbsp;&nbsp;&nbsp;</span>
       <span>⚠️ Planlı bakım 15 Temmuz'da saat 03:00'te. &nbsp;&nbsp;&nbsp;</span>
@@ -368,19 +359,19 @@
     </div>
   </div>
 
-  <div class="loader-container" id="loader">
+  <div class="loader-container" id="loader" aria-live="polite" aria-atomic="true" role="status" aria-label="Yükleniyor">
     <div class="logo">NineBorn Roleplay</div>
     <div class="info-text" id="infoText">Yükleniyor...</div>
-    <div class="progress-bar">
+    <div class="progress-bar" aria-hidden="true">
       <div class="progress" id="progressBar"></div>
     </div>
-    <button id="skipButton">Atla</button>
+    <button id="skipButton" aria-label="Yüklemeyi atla">Atla</button>
   </div>
 
-  <div class="main-content" id="mainContent">
+  <div class="main-content" id="mainContent" tabindex="-1">
     <h1>NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!</h1>
-    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
-    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
+    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button" rel="noopener noreferrer">Discord'a Katıl</a>
+    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button" rel="noopener noreferrer">Oyuna Katıl</a>
 
     <div class="info-sections">
       <div class="info-box">
@@ -415,20 +406,21 @@
   </div>
 
   <!-- Kurallar Modal -->
-  <div id="rulesModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+  <div id="rulesModal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle" aria-describedby="rulesDesc">
     <div class="content-box">
       <h2 id="rulesTitle">Site Kurallarını Kabul Edin</h2>
-      <p>
-        Lütfen siteye devam etmek için aşağıdaki kuralları okuyup kabul ediniz:<br><br>
-        1. Saygılı olun.<br>
-        2. Küfür ve hakaret yasaktır.<br>
-        3. Gerçek RP yapın.<br>
-        4. Yetkililerin uyarılarına uyun.<br>
-        5. Hile ve kötü davranışlara izin verilmez.<br><br>
-      </p>
-      <p class="extra-info">
-        <a href="kurallar.html" target="_blank" aria-label="Tüm Kuralları Gör">📄 Tüm Kuralları Gör</a><br>
-        <em>Son güncelleme: 12 Temmuz 2025</em>
+      <p id="rulesDesc">
+        Lütfen siteye devam etmek için aşağıdaki kuralları okuyup kabul ediniz:
+
+        1. Saygılı olun.
+        2. Küfür ve hakaret yasaktır.
+        3. Gerçek RP yapın.
+        4. Yetkililerin uyarılarına uyun.
+        5. Hile ve kötü davranışlara izin verilmez.
+
+        Ayrıca Discord kuralları ve gerçek hayat kurallarına uygun davranmanız beklenmektedir.
+        <br><br>
+        Kuralları kabul etmeden siteye erişim sağlanamaz.
       </p>
       <button id="acceptRulesBtn" aria-label="Kuralları kabul et">Kabul Ediyorum</button>
     </div>
@@ -452,9 +444,6 @@
       { text: 'Son ayarlamalar yapılıyor...', duration: 1200 },
       { text: 'Tamamlanıyor...', duration: 1000 }
     ];
-
-    let progress = 0;
-    let stepIndex = 0;
 
     // Kurallar modalı kontrolü
     function checkRulesAccepted() {
@@ -487,6 +476,8 @@
       loader.style.display = 'block';
       mainContent.style.display = 'none';
 
+      let stepIndex = 0;
+
       function nextStep() {
         if (stepIndex >= loadingSteps.length) {
           progressBar.style.width = '100%';
@@ -494,6 +485,7 @@
           setTimeout(() => {
             loader.style.display = 'none';
             mainContent.style.display = 'block';
+            mainContent.focus();
           }, 700);
           return;
         }
@@ -525,6 +517,7 @@
       setTimeout(() => {
         loader.style.display = 'none';
         mainContent.style.display = 'block';
+        mainContent.focus();
       }, 300);
     });
 
