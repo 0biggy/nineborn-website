@@ -20,10 +20,9 @@
       font-family: 'Orbitron', sans-serif;
       color: var(--text-color);
       overflow: hidden;
-      padding-top: 40px; /* Banner için */
+      padding-top: 40px;
     }
 
-    /* Haber Banner */
     .news-banner {
       position: fixed;
       top: 0; left: 0; width: 100%;
@@ -46,7 +45,6 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* Loader */
     .loader-container {
       position: absolute;
       top: 50%; left: 50%;
@@ -98,7 +96,6 @@
       box-shadow: 0 0 15px #e6e6e6;
     }
 
-    /* Ana içerik */
     .main-content {
       display: none;
       padding: 40px 20px;
@@ -145,99 +142,10 @@
         transform: translate(0);
       }
     }
-    .discord-button, .play-button {
-      display: inline-block;
-      background: var(--accent-color);
-      color: black;
-      border-radius: 6px;
-      padding: 12px 28px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 12px var(--accent-color);
-      margin: 10px 15px 30px 15px;
-      transition: 0.3s;
-    }
-    .discord-button:hover, .play-button:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 20px #e6e6e6;
-    }
-    .info-sections {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-bottom: 50px;
-    }
-    .info-box {
-      background: rgba(255,255,255,0.1);
-      padding: 20px 25px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 15px var(--accent-color);
-      color: var(--accent-color);
-      font-weight: 700;
-      transition: background 0.3s;
-    }
-    .info-box:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    .info-box h2 {
-      margin-bottom: 12px;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-    .info-box p {
-      line-height: 1.5;
-      font-size: 1rem;
-    }
-    @media (max-width: 960px) {
-      .info-sections {
-        flex-direction: column;
-        align-items: center;
-      }
-      .info-box {
-        width: 90%;
-        max-width: 400px;
-      }
-    }
-    .jobs-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .jobs-section h2 {
-      width: 100%;
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-    .job-card {
-      background: rgba(255,255,255,0.1);
-      border-radius: 12px;
-      padding: 20px;
-      width: 180px;
-      box-shadow: 0 0 15px var(--accent-color);
-      color: var(--accent-color);
-      font-weight: 700;
-      transition: background 0.3s;
-    }
-    .job-card:hover {
-      background: rgba(255,255,255,0.2);
-    }
-    .slogan-section {
-      max-width: 600px;
-      margin: 30px auto 0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-shadow: 1px 1px 2px #000000cc;
-      line-height: 1.4;
-    }
 
-    /* Modal */
     #rulesModal {
       position: fixed;
-      top:0; left:0; right:0; bottom:0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.85);
       display: flex;
       justify-content: center;
@@ -245,13 +153,7 @@
       z-index: 99999;
       color: var(--accent-color);
       padding: 20px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.2rem;
-      line-height: 1.5;
       flex-direction: column;
-      border-radius: 10px;
-      user-select: none;
     }
     #rulesModal.hidden {
       display: none;
@@ -261,29 +163,22 @@
       padding: 30px 25px;
       border-radius: 15px;
       max-width: 600px;
-      width: 100%;
       box-shadow: 0 0 20px var(--accent-color);
-      text-align: left;
-      user-select: text;
     }
     #rulesModal h2 {
       margin-bottom: 20px;
       font-size: 2rem;
-      text-shadow: 1px 1px 4px #000000bb;
-      text-align: center;
     }
     #rulesModal p {
       margin-bottom: 30px;
-      font-weight: 400;
       font-size: 1rem;
       color: #ddd;
       max-height: 250px;
       overflow-y: auto;
-      line-height: 1.4;
-      border: 1px solid #ccc2;
+      line-height: 1.5;
+      background: rgba(255,255,255,0.1);
       padding: 15px;
       border-radius: 8px;
-      background: rgba(255,255,255,0.1);
       white-space: pre-line;
     }
     #acceptRulesBtn {
@@ -295,93 +190,50 @@
       border-radius: 8px;
       cursor: pointer;
       box-shadow: 0 0 12px var(--accent-color);
-      transition: background 0.3s, box-shadow 0.3s;
       font-size: 1.1rem;
-      display: block;
-      margin: 0 auto;
-    }
-    #acceptRulesBtn:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 20px #e6e6e6;
     }
   </style>
 </head>
 <body>
 
-  <div class="news-banner" aria-label="Haberler ve Duyurular">
-    <div class="news-content" id="newsContent" aria-live="polite" aria-atomic="true">
-      <span>🔔 Yeni güncelleme yayında! &nbsp;&nbsp;&nbsp;</span>
-      <span>🎉 Haftasonu etkinliği başlıyor! &nbsp;&nbsp;&nbsp;</span>
-      <span>⚠️ Planlı bakım 15 Temmuz'da saat 03:00'te. &nbsp;&nbsp;&nbsp;</span>
-      <span>🚓 Polis departmanı yeni görevleri açtı! &nbsp;&nbsp;&nbsp;</span>
-    </div>
-  </div>
-
-  <div class="loader-container" id="loader" aria-live="polite" aria-atomic="true" role="status" aria-label="Yükleniyor">
-    <div class="logo">NineBorn Roleplay</div>
-    <div class="info-text" id="infoText">Yükleniyor...</div>
-    <div class="progress-bar" aria-hidden="true">
-      <div class="progress" id="progressBar"></div>
-    </div>
-    <button id="skipButton" aria-label="Yüklemeyi atla">Atla</button>
-  </div>
-
-  <div class="main-content" id="mainContent" tabindex="-1">
-    <h1>NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!</h1>
-    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button" rel="noopener noreferrer">Discord'a Katıl</a>
-    <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button" rel="noopener noreferrer">Oyuna Katıl</a>
-
-    <div class="info-sections">
-      <div class="info-box">
-        <h2>Neden Kurulduk?</h2>
-        <p>NineBorn Roleplay, Almanya sokaklarında gerçekçi bir RP deneyimi sunmak için kuruldu. Amacımız kaliteli ve eğlenceli bir ortam oluşturmak.</p>
-      </div>
-      <div class="info-box">
-        <h2>Biz Kimiz?</h2>
-        <p>Tutkulu RP severleriz. Oyunculara destek olmak, keyifli bir ortam sunmak ve gelişimlerine katkı sağlamak önceliğimizdir.</p>
-      </div>
-      <div class="info-box">
-        <h2>Vizyonumuz</h2>
-        <p>En kaliteli ve en aktif Almanya RP sunucusu olmak; oyunculara unutulmaz anlar yaşatmak.</p>
-      </div>
-    </div>
-
-    <section class="jobs-section" aria-label="Meslekler">
-      <h2>Meslekler</h2>
-      <div class="job-card">Polis</div>
-      <div class="job-card">İtfaiyeci</div>
-      <div class="job-card">Ambulans</div>
-      <div class="job-card">Suçlu</div>
-      <div class="job-card">Taksi Şoförü</div>
-      <div class="job-card">Tüccar</div>
-      <div class="job-card">Garson</div>
-      <div class="job-card">Mekanik</div>
-    </section>
-
-    <div class="slogan-section">
-      <p>Ne olursan ol!<br />Eğer bir şey olamazsan, bu şehir seni yutar!</p>
-    </div>
-  </div>
-
-  <!-- Kurallar Modal -->
-  <div id="rulesModal" role="dialog" aria-modal="true" aria-labelledby="rulesTitle" aria-describedby="rulesDesc">
+  <div id="rulesModal">
     <div class="content-box">
-      <h2 id="rulesTitle">Site Kurallarını Kabul Edin</h2>
-      <p id="rulesDesc">
+      <h2>Site Kurallarını Kabul Et</h2>
+      <p>
         Lütfen siteye devam etmek için aşağıdaki kuralları okuyup kabul ediniz:
 
-        1. Saygılı olun.
-        2. Küfür ve hakaret yasaktır.
-        3. Gerçek RP yapın.
-        4. Yetkililerin uyarılarına uyun.
-        5. Hile ve kötü davranışlara izin verilmez.
+        Oyun Kuralları:
+        - Gerçekçi rol yapmalısınız.
+        - FailRP, RDM, VDM yasaktır.
+        - Yetkililere saygı gösteriniz.
+        - Hile, bug veya açık kullanımı yasaktır.
 
-        Ayrıca Discord kuralları ve gerçek hayat kurallarına uygun davranmanız beklenmektedir.
+        Discord Kuralları:
+        - Spam ve reklam yasaktır.
+        - Kavga, hakaret ve ayrımcılık yasaktır.
+        - Kanalların amacı dışında kullanımı yasaktır.
 
-        Kuralları kabul etmeden siteye erişim sağlanamaz.
+        Gerçek Hayat Etkileşimleri:
+        - Yasalara ve genel ahlaka uygun davranılmalıdır.
+
+        Devam etmek için "Kabul Ediyorum" butonuna basın.
       </p>
-      <button id="acceptRulesBtn" aria-label="Kuralları kabul et">Kabul Ediyorum</button>
+      <button id="acceptRulesBtn">Kabul Ediyorum</button>
     </div>
+  </div>
+
+  <div class="loader-container" id="loader">
+    <div class="logo">NineBorn Roleplay</div>
+    <div class="info-text" id="infoText">Yükleniyor...</div>
+    <div class="progress-bar">
+      <div class="progress" id="progressBar"></div>
+    </div>
+    <button id="skipButton">Atla</button>
+  </div>
+
+  <div class="main-content" id="mainContent">
+    <h1>NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!</h1>
+    <!-- İçerik -->
   </div>
 
   <script>
@@ -393,7 +245,6 @@
     const rulesModal = document.getElementById('rulesModal');
     const acceptRulesBtn = document.getElementById('acceptRulesBtn');
 
-    // Yükleme adımları
     const loadingSteps = [
       { text: 'Veritabanı bağlantısı kuruluyor...', duration: 1200 },
       { text: 'Dosyalar kontrol ediliyor...', duration: 1500 },
@@ -403,7 +254,6 @@
       { text: 'Tamamlanıyor...', duration: 1000 }
     ];
 
-    // Kurallar modalı kontrolü
     function checkRulesAccepted() {
       return localStorage.getItem('rulesAccepted') === 'true';
     }
@@ -424,7 +274,6 @@
       rulesModal.classList.add('hidden');
       loader.style.display = 'none';
       mainContent.style.display = 'block';
-      mainContent.focus();
     }
 
     acceptRulesBtn.addEventListener('click', () => {
@@ -433,13 +282,11 @@
       startLoading();
     });
 
-    // Yükleme animasyonu fonksiyonu
     function startLoading() {
       loader.style.display = 'block';
       mainContent.style.display = 'none';
 
       let stepIndex = 0;
-
       function nextStep() {
         if (stepIndex >= loadingSteps.length) {
           progressBar.style.width = '100%';
@@ -449,7 +296,6 @@
           }, 700);
           return;
         }
-
         let currentStep = loadingSteps[stepIndex];
         infoText.textContent = currentStep.text;
 
@@ -470,7 +316,6 @@
       nextStep();
     }
 
-    // Atla butonu
     skipButton.addEventListener('click', () => {
       progressBar.style.width = '100%';
       infoText.textContent = 'Yükleme atlandı!';
@@ -479,7 +324,6 @@
       }, 300);
     });
 
-    // Sayfa yüklendiğinde
     window.addEventListener('load', () => {
       if (checkRulesAccepted()) {
         startLoading();
