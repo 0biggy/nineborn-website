@@ -1,4 +1,3 @@
-önemli kod
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -23,10 +22,8 @@
       font-family: 'Orbitron', sans-serif;
       color: var(--text-color);
       overflow: hidden;
-      padding-top: 40px; /* Haber banner için boşluk */
+      padding-top: 40px;
     }
-
-    /* Haberler Banner */
     .news-banner {
       position: fixed;
       top: 0;
@@ -34,10 +31,7 @@
       width: 100%;
       background: #222;
       color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      overflow: hidden;
       white-space: nowrap;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
       padding: 10px 0;
       z-index: 10000;
     }
@@ -47,14 +41,9 @@
       animation: scrollNews 20s linear infinite;
     }
     @keyframes scrollNews {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+      0% { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
     }
-
     .loader-container {
       position: absolute;
       top: 50%;
@@ -105,7 +94,6 @@
       background: #e6e6e6;
       box-shadow: 0 0 15px #e6e6e6;
     }
-
     .main-content {
       display: none;
       padding: 40px 20px;
@@ -118,54 +106,20 @@
       color: var(--accent-color);
       text-align: center;
     }
-
     .main-content h1 {
       font-size: 3rem;
       margin-bottom: 20px;
       text-shadow: 1px 1px 5px #00000077;
       animation: glitch 2s infinite;
     }
-
-    /* Glitch animasyon efektleri */
     @keyframes glitch {
-      0% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(0);
-      }
-      20% {
-        text-shadow:
-          -2px 0 red,
-          2px 0 cyan;
-        transform: translate(-2px, 2px);
-      }
-      40% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(2px, -2px);
-      }
-      60% {
-        text-shadow:
-          -2px 0 red,
-          2px 0 cyan;
-        transform: translate(-2px, 2px);
-      }
-      80% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(2px, -2px);
-      }
-      100% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(0);
-      }
+      0% { text-shadow: 2px 0 red, -2px 0 cyan; transform: translate(0); }
+      20% { text-shadow: -2px 0 red, 2px 0 cyan; transform: translate(-2px, 2px); }
+      40% { text-shadow: 2px 0 red, -2px 0 cyan; transform: translate(2px, -2px); }
+      60% { text-shadow: -2px 0 red, 2px 0 cyan; transform: translate(-2px, 2px); }
+      80% { text-shadow: 2px 0 red, -2px 0 cyan; transform: translate(2px, -2px); }
+      100% { text-shadow: 2px 0 red, -2px 0 cyan; transform: translate(0); }
     }
-
     .discord-button, .play-button {
       display: inline-block;
       background: var(--accent-color);
@@ -178,118 +132,24 @@
       margin: 10px 15px 30px 15px;
       transition: 0.3s;
     }
-
     .discord-button:hover, .play-button:hover {
       background: #e6e6e6;
       box-shadow: 0 0 20px #e6e6e6;
     }
-
-    .info-sections {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-bottom: 50px;
-    }
-
-    .info-box {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 25px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 15px var(--accent-color);
-      color: var(--accent-color);
-      font-weight: 700;
-      transition: background 0.3s;
-    }
-
-    .info-box:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .info-box h2 {
-      margin-bottom: 12px;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-
-    .info-box p {
-      line-height: 1.5;
-      font-size: 1rem;
-    }
-
-    @media (max-width: 960px) {
-      .info-sections {
-        flex-direction: column;
-        align-items: center;
-      }
-      .info-box {
-        width: 90%;
-        max-width: 400px;
-      }
-    }
-
-    .jobs-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .jobs-section h2 {
-      width: 100%;
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-
-    .job-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      width: 180px;
-      box-shadow: 0 0 15px var(--accent-color);
-      color: var(--accent-color);
-      font-weight: 700;
-      transition: background 0.3s;
-    }
-
-    .job-card:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .slogan-section {
-      max-width: 600px;
-      margin: 30px auto 0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-shadow: 1px 1px 2px #000000cc;
-      line-height: 1.4;
-    }
-
-    /* Modal overlay and content */
     #rulesModal {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0,0,0,0.85);
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
       z-index: 9999;
-      color: var(--accent-color);
       padding: 20px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.2rem;
-      line-height: 1.5;
-      flex-direction: column;
-      border-radius: 10px;
+      color: var(--accent-color);
     }
-
-    #rulesModal.hidden {
-      display: none;
+    #rulesModal.show {
+      display: flex;
     }
-
     #rulesModal .content-box {
       background: var(--box-bg);
       padding: 30px 25px;
@@ -298,65 +158,41 @@
       width: 100%;
       box-shadow: 0 0 20px var(--accent-color);
     }
-
-    #rulesModal h2 {
-      margin-bottom: 20px;
-      font-size: 2rem;
-      text-shadow: 1px 1px 4px #000000bb;
-    }
-
-    #rulesModal p {
-      margin-bottom: 30px;
-      font-weight: 400;
-      font-size: 1rem;
-      color: #ddd;
-      max-height: 250px;
-      overflow-y: auto;
-      text-align: left;
-      line-height: 1.4;
-      border: 1px solid #ccc2;
-      padding: 15px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.1);
-    }
-
-    #acceptRulesBtn {
+    #rulesModal button {
+      margin-top: 20px;
       background: var(--accent-color);
       color: black;
       padding: 12px 28px;
-      font-weight: bold;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      box-shadow: 0 0 12px var(--accent-color);
-      transition: background 0.3s, box-shadow 0.3s;
       font-size: 1.1rem;
     }
-
-    #acceptRulesBtn:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 20px #e6e6e6;
+    .rules-warning {
+      color: #ff4c4c;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-top: 15px;
+      background: rgba(255, 0, 0, 0.08);
+      padding: 10px 15px;
+      border-radius: 8px;
+      border: 1px solid #ff4c4c88;
+      text-align: left;
     }
   </style>
 </head>
 <body>
-
-  <!-- Haberler Banner -->
-  <div class="news-banner" aria-label="Haberler ve Duyurular">
-    <div class="news-content" id="newsContent">
-      <span>🔔 Yeni güncelleme yayında! &nbsp;&nbsp;&nbsp;</span>
-      <span>🎉 Haftasonu etkinliği başlıyor! &nbsp;&nbsp;&nbsp;</span>
-      <span>⚠️ Planlı bakım 15 Temmuz'da saat 03:00'te. &nbsp;&nbsp;&nbsp;</span>
-      <span>🚓 Polis departmanı yeni görevleri açtı! &nbsp;&nbsp;&nbsp;</span>
-    </div>
-  </div>
+  <div class="news-banner"><div class="news-content" id="newsContent">
+    <span>🔔 Yeni güncelleme yayında! &nbsp;&nbsp;&nbsp;</span>
+    <span>🎉 Haftasonu etkinliği başlıyor! &nbsp;&nbsp;&nbsp;</span>
+    <span>⚠️ Planlı bakım 15 Temmuz'da saat 03:00'te. &nbsp;&nbsp;&nbsp;</span>
+    <span>🚓 Polis departmanı yeni görevleri açtı! &nbsp;&nbsp;&nbsp;</span>
+  </div></div>
 
   <div class="loader-container" id="loader">
     <div class="logo">NineBorn Roleplay</div>
     <div class="info-text" id="infoText">Yükleniyor...</div>
-    <div class="progress-bar">
-      <div class="progress" id="progressBar"></div>
-    </div>
+    <div class="progress-bar"><div class="progress" id="progressBar"></div></div>
     <button id="skipButton">Atla</button>
   </div>
 
@@ -364,93 +200,61 @@
     <h1>NineBorn Roleplay Resmi Sitesine Hoş Geldiniz!</h1>
     <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
     <a href="https://www.roblox.com/games/1234567890" target="_blank" class="play-button">Oyuna Katıl</a>
-
-    <div class="info-sections">
-      <div class="info-box">
-        <h2>Neden Kurulduk?</h2>
-        <p>NineBorn Roleplay, Almanya sokaklarında gerçekçi bir RP deneyimi sunmak için kuruldu. Amacımız kaliteli ve eğlenceli bir ortam oluşturmak.</p>
-      </div>
-      <div class="info-box">
-        <h2>Biz Kimiz?</h2>
-        <p>Tutkulu RP severleriz. Oyunculara destek olmak, keyifli bir ortam sunmak ve gelişimlerine katkı sağlamak önceliğimizdir.</p>
-      </div>
-      <div class="info-box">
-        <h2>Vizyonumuz</h2>
-        <p>En kaliteli ve en aktif Almanya RP sunucusu olmak; oyunculara unutulmaz anlar yaşatmak.</p>
-      </div>
-    </div>
-
-    <section class="jobs-section" aria-label="Meslekler">
-      <h2>Meslekler</h2>
-      <div class="job-card">Polis</div>
-      <div class="job-card">İtfaiyeci</div>
-      <div class="job-card">Ambulans</div>
-      <div class="job-card">Suçlu</div>
-      <div class="job-card">Taksi Şoförü</div>
-      <div class="job-card">Tüccar</div>
-      <div class="job-card">Garson</div>
-      <div class="job-card">Mekanik</div>
-    </section>
-
-    <div class="slogan-section">
-      <p>Ne olursan ol!<br />Eğer bir şey olamazsan, bu şehir seni yutar!</p>
-    </div>
   </div>
 
-  <!-- Kurallar Modal -->
-  <div id="rulesModal" class="hidden" role="dialog" aria-modal="true" aria-labelledby="rulesTitle">
+  <div id="rulesModal">
     <div class="content-box">
-      <h2 id="rulesTitle">Site Kurallarını Kabul Edin</h2>
+      <h2>Site Kurallarını Kabul Edin</h2>
       <p>
         Lütfen siteye devam etmek için aşağıdaki kuralları okuyup kabul ediniz:<br><br>
         1. Saygılı olun.<br>
         2. Küfür ve hakaret yasaktır.<br>
         3. Gerçek RP yapın.<br>
         4. Yetkililerin uyarılarına uyun.<br>
-        5. Hile ve kötü davranışlara izin verilmez.<br><br>
-        Kuralları kabul etmeden siteye erişim sağlanamaz.
+        5. Hile ve kötü davranışlara izin verilmez.<br>
+        6. TDK - Türk Dil Kurallarına Uymalısınız.
       </p>
-      <button id="acceptRulesBtn" aria-label="Kuralları kabul et">Kabul Ediyorum</button>
+      <div class="rules-warning">
+        🔴 Kuralları kabul ettiğin anda, bu kuralları okuduğunu, anladığını ve tamamen kabul ettiğini beyan etmiş olursun.  
+        Aksi takdirde doğabilecek sonuçlardan sorumlu tutulursun.
+      </div>
+      <div class="rules-warning">
+        🔴 NineBorn Roleplay Yönetim Kurulu, kuralları her zaman değiştirme hakkına sahiptir ve bu değişiklikleri gizli tutabilir.
+      </div>
+      <button id="acceptRulesBtn">Kabul Ediyorum</button>
     </div>
   </div>
 
   <script>
-    const progressBar = document.getElementById('progressBar');
-    const infoText = document.getElementById('infoText');
-    const loader = document.getElementById('loader');
-    const mainContent = document.getElementById('mainContent');
-    const skipButton = document.getElementById('skipButton');
     const rulesModal = document.getElementById('rulesModal');
     const acceptRulesBtn = document.getElementById('acceptRulesBtn');
+    const loader = document.getElementById('loader');
+    const mainContent = document.getElementById('mainContent');
+    const infoText = document.getElementById('infoText');
+    const progressBar = document.getElementById('progressBar');
+    const skipButton = document.getElementById('skipButton');
 
-    // Yükleme adımları
     const loadingSteps = [
-      { text: 'Veritabanı bağlantısı kuruluyor...', duration: 1200 },
-      { text: 'Dosyalar kontrol ediliyor...', duration: 1500 },
-      { text: 'Sunucuya bağlanılıyor...', duration: 1500 },
-      { text: 'Oyun verileri yükleniyor...', duration: 1800 },
-      { text: 'Son ayarlamalar yapılıyor...', duration: 1200 },
+      { text: 'Veritabanı bağlantısı kuruluyor...', duration: 1000 },
+      { text: 'Dosyalar kontrol ediliyor...', duration: 1000 },
+      { text: 'Sunucuya bağlanılıyor...', duration: 1000 },
+      { text: 'Oyun verileri yükleniyor...', duration: 1000 },
+      { text: 'Son ayarlamalar yapılıyor...', duration: 1000 },
       { text: 'Tamamlanıyor...', duration: 1000 }
     ];
 
-    let progress = 0;
-    let stepIndex = 0;
-    let totalDuration = loadingSteps.reduce((acc, step) => acc + step.duration, 0);
-
-    // Kurallar modalı kontrolü
     function checkRulesAccepted() {
       return localStorage.getItem('rulesAccepted') === 'true';
     }
 
     function showRulesModal() {
-      rulesModal.classList.remove('hidden');
+      rulesModal.classList.add('show');
       loader.style.display = 'none';
       mainContent.style.display = 'none';
     }
 
     function hideRulesModal() {
-      rulesModal.classList.add('hidden');
-      loader.style.display = 'block';
+      rulesModal.classList.remove('show');
     }
 
     acceptRulesBtn.addEventListener('click', () => {
@@ -459,14 +263,9 @@
       startLoading();
     });
 
-    // Yükleme animasyonu fonksiyonu
     function startLoading() {
-      if (!checkRulesAccepted()) {
-        showRulesModal();
-        return;
-      }
       loader.style.display = 'block';
-      mainContent.style.display = 'none';
+      let stepIndex = 0;
 
       function nextStep() {
         if (stepIndex >= loadingSteps.length) {
@@ -479,27 +278,25 @@
           return;
         }
 
-        let currentStep = loadingSteps[stepIndex];
+        const currentStep = loadingSteps[stepIndex];
         infoText.textContent = currentStep.text;
 
         let start = Date.now();
         let interval = setInterval(() => {
           let elapsed = Date.now() - start;
-          let stepProgress = Math.min(elapsed / currentStep.duration, 1);
-          let overallProgress = ((stepIndex + stepProgress) / loadingSteps.length) * 100;
-          progressBar.style.width = overallProgress + '%';
+          let progress = Math.min(elapsed / currentStep.duration, 1);
+          progressBar.style.width = ((stepIndex + progress) / loadingSteps.length) * 100 + '%';
 
           if (elapsed >= currentStep.duration) {
             clearInterval(interval);
             stepIndex++;
             nextStep();
           }
-        }, 20);
+        }, 30);
       }
       nextStep();
     }
 
-    // Atla butonu
     skipButton.addEventListener('click', () => {
       progressBar.style.width = '100%';
       infoText.textContent = 'Yükleme atlandı!';
@@ -509,7 +306,6 @@
       }, 300);
     });
 
-    // Sayfa yüklendiğinde
     window.addEventListener('load', () => {
       if (checkRulesAccepted()) {
         startLoading();
