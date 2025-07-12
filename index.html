@@ -305,11 +305,11 @@
     }
 
     #rulesModal p {
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       font-weight: 400;
       font-size: 1rem;
       color: #ddd;
-      max-height: 250px;
+      max-height: 180px;
       overflow-y: auto;
       text-align: left;
       line-height: 1.4;
@@ -317,6 +317,23 @@
       padding: 15px;
       border-radius: 8px;
       background: rgba(255,255,255,0.1);
+    }
+
+    #rulesModal p.extra-info {
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: #bbb;
+      max-height: none;
+      border: none;
+      background: transparent;
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    #rulesModal p.extra-info a {
+      color: #fff;
+      text-decoration: underline;
+      cursor: pointer;
     }
 
     #acceptRulesBtn {
@@ -330,6 +347,7 @@
       box-shadow: 0 0 12px var(--accent-color);
       transition: background 0.3s, box-shadow 0.3s;
       font-size: 1.1rem;
+      margin-top: 10px;
     }
 
     #acceptRulesBtn:hover {
@@ -407,7 +425,10 @@
         3. Gerçek RP yapın.<br>
         4. Yetkililerin uyarılarına uyun.<br>
         5. Hile ve kötü davranışlara izin verilmez.<br><br>
-        Kuralları kabul etmeden siteye erişim sağlanamaz.
+      </p>
+      <p class="extra-info">
+        <a href="kurallar.html" target="_blank" aria-label="Tüm Kuralları Gör">📄 Tüm Kuralları Gör</a><br>
+        <em>Son güncelleme: 12 Temmuz 2025</em>
       </p>
       <button id="acceptRulesBtn" aria-label="Kuralları kabul et">Kabul Ediyorum</button>
     </div>
@@ -434,7 +455,6 @@
 
     let progress = 0;
     let stepIndex = 0;
-    let totalDuration = loadingSteps.reduce((acc, step) => acc + step.duration, 0);
 
     // Kurallar modalı kontrolü
     function checkRulesAccepted() {
