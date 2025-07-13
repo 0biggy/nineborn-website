@@ -3,447 +3,99 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>İstiklal Roleplay V1.5</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet" />
+  <title>Ana Sayfa | İstiklal Roleplay</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg-color: #121212;
-      --text-color: #f5f5f5;
-      --box-bg: rgba(0, 0, 0, 0.7);
-      --accent-color: #ffffff;
-    }
     * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+      margin: 0; padding: 0; box-sizing: border-box;
     }
     body {
-      background: var(--bg-color);
+      background: #121212;
+      color: #f5f5f5;
       font-family: 'Orbitron', sans-serif;
-      color: var(--text-color);
-      overflow: hidden;
-      padding-top: 40px; /* Haber banner için boşluk */
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
-
-    /* Haberler Banner */
-    .news-banner {
-      position: fixed;
+    header {
+      background: #1e1e1e;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      position: sticky;
       top: 0;
-      left: 0;
-      width: 100%;
-      background: #222;
-      color: #fff;
-      font-family: 'Orbitron', sans-serif;
-      overflow: hidden;
-      white-space: nowrap;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.7);
-      padding: 10px 0;
-      z-index: 10000;
+      z-index: 10;
     }
-    .news-content {
-      display: inline-block;
-      padding-left: 100%;
-      animation: scrollNews 20s linear infinite;
+    header h1 {
+      font-size: 1.5rem;
+      color: #ffffff;
     }
-    @keyframes scrollNews {
-      0% {
-        transform: translateX(0%);
-      }
-      100% {
-        transform: translateX(-100%);
-      }
+    nav a {
+      color: #ffffff;
+      text-decoration: none;
+      margin-left: 20px;
+      transition: 0.3s;
     }
-
-    .loader-container {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+    nav a:hover {
+      color: #00ffff;
+    }
+    main {
+      flex: 1;
+      padding: 40px 20px;
       text-align: center;
     }
-    .logo {
+    main h2 {
       font-size: 2.5rem;
       margin-bottom: 20px;
-      text-shadow: 2px 2px #00000099;
-      color: var(--accent-color);
     }
-    .info-text {
+    main p {
       font-size: 1.2rem;
-      margin-bottom: 30px;
-      height: 24px;
-      color: var(--accent-color);
-    }
-    .progress-bar {
-      width: 300px;
-      height: 20px;
-      border: 2px solid var(--text-color);
-      background-color: rgba(255, 255, 255, 0.1);
+      max-width: 700px;
       margin: 0 auto;
-      border-radius: 10px;
-      overflow: hidden;
+      line-height: 1.6;
     }
-    .progress {
-      background: linear-gradient(to right, var(--accent-color), #ffffff);
-      width: 0%;
-      height: 100%;
-      transition: width 0.2s;
-    }
-    #skipButton {
-      margin-top: 20px;
-      padding: 8px 16px;
-      font-size: 1rem;
-      background: var(--accent-color);
-      color: black;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      box-shadow: 0 0 10px var(--accent-color);
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-    #skipButton:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 15px #e6e6e6;
-    }
-
-    .main-content {
-      display: none;
-      padding: 40px 20px;
-      max-width: 1100px;
-      margin: 0 auto;
-      overflow-y: auto;
-      height: 100vh;
-      background: var(--box-bg);
-      border-radius: 15px;
-      color: var(--accent-color);
+    footer {
+      background: #1e1e1e;
+      padding: 15px 20px;
       text-align: center;
+      font-size: 0.9rem;
+      color: #888;
+      border-top: 1px solid #333;
     }
-
-    .main-content h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 5px #00000077;
-      animation: glitch 2s infinite;
-    }
-
-    /* Glitch animasyon efektleri */
-    @keyframes glitch {
-      0% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(0);
+    @media (max-width: 768px) {
+      nav a {
+        margin-left: 10px;
+        font-size: 0.9rem;
       }
-      20% {
-        text-shadow:
-          -2px 0 red,
-          2px 0 cyan;
-        transform: translate(-2px, 2px);
+      main h2 {
+        font-size: 2rem;
       }
-      40% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(2px, -2px);
-      }
-      60% {
-        text-shadow:
-          -2px 0 red,
-          2px 0 cyan;
-        transform: translate(-2px, 2px);
-      }
-      80% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(2px, -2px);
-      }
-      100% {
-        text-shadow:
-          2px 0 red,
-          -2px 0 cyan;
-        transform: translate(0);
-      }
-    }
-
-    .discord-button, .play-button {
-      display: inline-block;
-      background: var(--accent-color);
-      color: black;
-      border-radius: 6px;
-      padding: 12px 28px;
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 0 12px var(--accent-color);
-      margin: 10px 15px 30px 15px;
-      transition: 0.3s;
-      cursor: pointer;
-      border: none;
-      font-size: 1rem;
-    }
-
-    .discord-button:hover, .play-button:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 20px #e6e6e6;
-    }
-
-    .info-sections {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-bottom: 50px;
-    }
-
-    .info-box {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px 25px;
-      border-radius: 10px;
-      width: 300px;
-      box-shadow: 0 0 15px var(--accent-color);
-      color: var(--accent-color);
-      font-weight: 700;
-      transition: background 0.3s;
-    }
-
-    .info-box:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .info-box h2 {
-      margin-bottom: 12px;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-
-    .info-box p {
-      line-height: 1.5;
-      font-size: 1rem;
-    }
-
-    @media (max-width: 960px) {
-      .info-sections {
-        flex-direction: column;
-        align-items: center;
-      }
-      .info-box {
-        width: 90%;
-        max-width: 400px;
-      }
-    }
-
-    .jobs-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    .jobs-section h2 {
-      width: 100%;
-      font-size: 2.2rem;
-      margin-bottom: 20px;
-      text-shadow: 1px 1px 3px #000000aa;
-    }
-
-    .job-card {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 20px;
-      width: 180px;
-      box-shadow: 0 0 15px var(--accent-color);
-      color: var(--accent-color);
-      font-weight: 700;
-      transition: background 0.3s;
-    }
-
-    .job-card:hover {
-      background: rgba(255, 255, 255, 0.2);
-    }
-
-    .slogan-section {
-      max-width: 600px;
-      margin: 30px auto 0;
-      font-size: 1.5rem;
-      font-weight: 700;
-      text-shadow: 1px 1px 2px #000000cc;
-      line-height: 1.4;
-    }
-
-    /* Modal overlay and content */
-    #rulesModal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      color: var(--accent-color);
-      padding: 20px;
-      text-align: center;
-      font-weight: 700;
-      font-size: 1.2rem;
-      line-height: 1.5;
-      flex-direction: column;
-      border-radius: 10px;
-    }
-
-    #rulesModal.hidden {
-      display: none;
-    }
-
-    #rulesModal .content-box {
-      background: var(--box-bg);
-      padding: 30px 25px;
-      border-radius: 12px;
-      max-width: 600px;
-      box-shadow: 0 0 30px var(--accent-color);
-    }
-
-    #rulesModal button {
-      margin-top: 25px;
-      padding: 12px 28px;
-      font-weight: 700;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: var(--accent-color);
-      color: black;
-      cursor: pointer;
-      box-shadow: 0 0 15px var(--accent-color);
-      transition: background 0.3s, box-shadow 0.3s;
-    }
-
-    #rulesModal button:hover {
-      background: #e6e6e6;
-      box-shadow: 0 0 20px #e6e6e6;
     }
   </style>
 </head>
 <body>
-  <div class="news-banner">
-    <div class="news-content">
-      <span>📢 İstiklal Roleplay güncellendi! Yeni işçi sistemi ve etkinlikler! 🎉 | Destek için Discord'a katılın! 🚀</span>
-    </div>
-  </div>
 
-  <div class="loader-container" id="loader">
-    <div class="logo">İstiklal Roleplay V1.5</div>
-    <div class="info-text" id="infoText">Yükleniyor...</div>
-    <div class="progress-bar">
-      <div class="progress" id="progressBar"></div>
-    </div>
-    <button id="skipButton">Atla</button>
-  </div>
+  <header>
+    <h1>RP Sitesi</h1>
+    <nav>
+      <a href="index.html">Ana Sayfa</a>
+      <a href="hakkimizda.html">Hakkımızda</a>
+      <a href="kurallar.html">Kurallar</a>
+      <a href="duyurular.html">Duyurular</a>
+      <a href="iletisim.html">İletişim</a>
+    </nav>
+  </header>
 
-  <div class="main-content" id="mainContent">
-    <h1>İstiklal Roleplay Resmi Sitesine Hoş Geldiniz!</h1>
-    <a href="https://discord.gg/SMStN7JyDa" target="_blank" class="discord-button">Discord'a Katıl</a>
-    <a href="https://discord.com/oauth2/authorize?client_id=1393535934175121438&response_type=code&redirect_uri=https%3A%2F%2Fnineborn.vercel.app%2Fapi%2Fcallback&scope=identify" target="_blank" class="discord-button">
-      Discord ile Giriş Yap
-    </a>
-    <a href="https://www.roblox.com/games/start?placeId=7711635737&launchData=joinCode%3Dtiz7nfa7" target="_blank" class="play-button">Oyuna Katıl</a>
+  <main>
+    <h2>Hoş Geldiniz!</h2>
+    <p>Bu site, RP topluluğumuz için hazırlanmış resmi bilgilendirme platformudur. Menüden istediğiniz sayfaya geçiş yapabilirsiniz.</p>
+  </main>
 
-    <div class="info-sections">
-      <div class="info-box">
-        <h2>Hakkımızda</h2>
-        <p>İstiklal, roleplay oyun deneyimini en üst seviyeye çıkarmak için tasarlanmış kaliteli bir sunucudur.</p>
-      </div>
-      <div class="info-box">
-        <h2>Özellikler</h2>
-        <p>Yeni işçi sistemi, özel etkinlikler, ve gelişmiş araçlar ile eşsiz bir deneyim sunuyoruz.</p>
-      </div>
-      <div class="info-box">
-        <h2>Topluluk</h2>
-        <p>Aktif ve destekleyici oyuncu topluluğumuz ile her zaman yanınızdayız.</p>
-      </div>
-    </div>
+  <footer>
+    &copy; 2025 - 2026 İstiklal Roleplay| Tüm hakları saklıdır.
+  </footer>
 
-    <div class="jobs-section">
-      <h2>İstiklal Roleplay'in Sizlere Tavsiye ettiği  İşler</h2>
-      <div class="job-card">Polis Memuru</div>
-      <div class="job-card">Doktor</div>
-      <div class="job-card">İtfaiyeci</div>
-      <div class="job-card">İstiklal TV</div>
-      <div class="job-card">İstiklal Belediyesi</div>
-      <div class="job-card">Devlet Yetkilileri</div>
-    </div>
-
-    <div class="slogan-section">
-      <p>“İstiklal Roleplay ile Gerçekleri Yaşa!”</p>
-    </div>
-  </div>
-
-  <div id="rulesModal">
-    <div class="content-box">
-      <h2>Sunucu Kuralları</h2>
-      <p>Lütfen sunucu kurallarını okuyunuz ve kabul ediniz. Kurallara uyulmadığı takdirde işlem yapılacaktır.</p>
-      <button id="acceptRulesBtn">Kabul Ediyorum</button>
-    </div>
-  </div>
-
-  <script>
-    const infoText = document.getElementById('infoText');
-    const progressBar = document.getElementById('progressBar');
-    const loader = document.getElementById('loader');
-    const mainContent = document.getElementById('mainContent');
-    const skipButton = document.getElementById('skipButton');
-    const rulesModal = document.getElementById('rulesModal');
-    const acceptRulesBtn = document.getElementById('acceptRulesBtn');
-
-    let progress = 0;
-    const loadMessages = [
-      "Kodlar Yükleniyor...",
-      "DataBase Kuruluyor...",
-      "Güvenlik İşlemleri Sağlanıyor.",
-      "Son kontroller yapılıyor...",
-      "Yükleme tamamlanıyor..."
-    ];
-
-    function updateLoading() {
-      if (progress >= 100) {
-        clearInterval(loadingInterval);
-        infoText.textContent = "Yükleme tamamlandı!";
-        setTimeout(showMainContent, 500);
-        return;
-      }
-      progress += 1;
-      progressBar.style.width = progress + '%';
-
-      // Her 20% için farklı mesaj göster
-      const msgIndex = Math.floor(progress / 20);
-      infoText.textContent = loadMessages[msgIndex] || "Yükleniyor...";
-    }
-
-    function showMainContent() {
-      loader.style.display = 'none';
-      // Eğer kurallar kabul edilmemişse modal açılır
-      if (!localStorage.getItem('rulesAccepted')) {
-        rulesModal.classList.remove('hidden');
-      } else {
-        mainContent.style.display = 'block';
-      }
-    }
-
-    skipButton.addEventListener('click', () => {
-      clearInterval(loadingInterval);
-      progressBar.style.width = '100%';
-      infoText.textContent = "Yükleme atlandı!";
-      setTimeout(showMainContent, 300);
-    });
-
-    acceptRulesBtn.addEventListener('click', () => {
-      localStorage.setItem('rulesAccepted', 'true');
-      rulesModal.classList.add('hidden');
-      mainContent.style.display = 'block';
-    });
-
-    // Başlangıçta kuralları kabul ettiyse modal gösterme
-    if (localStorage.getItem('rulesAccepted')) {
-      rulesModal.classList.add('hidden');
-    }
-
-    const loadingInterval = setInterval(updateLoading, 70);
-  </script>
 </body>
 </html>
